@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 00:58:55
+ * @Last Modified time: 2017-06-23 01:21:06
  */
 'use strict';
 
@@ -30,7 +30,10 @@ module.exports = app => {
     async create() {
       const { ctx } = this;
       const body = ctx.request.body;
+      console.log(body);
       const query = ctx.query;
+      console.log(query);
+      
       query.encrypt = body.encrypt;
       ctx.validate(createRule, query);
       this.signatureValid(query, body.encrypt);
