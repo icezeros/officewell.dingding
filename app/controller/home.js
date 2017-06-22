@@ -1,3 +1,9 @@
+/*
+ * @Author: hgs
+ * @Date: 2017-06-22 13:52:55
+ * @Last Modified by: hgs
+ * @Last Modified time: 2017-06-22 23:04:10
+ */
 'use strict';
 
 module.exports = app => {
@@ -8,10 +14,14 @@ module.exports = app => {
       const key = '4g5j64qlyl3zvetqxz5jiocdr586fn2zvjpa8zls3ij';
       const msg = this.decrypt(aesMsg, key);
       console.log('===     ', msg);
-      const mm = this.encrypt(msg, key);
-      console.log('===     ', mm);
+      
+      // const mm = this.encrypt('{"EventType":"check_create_suite_url","Random":"LPIdSnlF","TestSuiteKey":"suite4xxxxxxxxxxxxxxx"}', key);
+      // console.log('---     ', mm);
 
-      this.ctx.body = 'hi, egg';
+      // const msg = this.decrypt(mm, key);
+      // console.log('===     ', msg);
+
+      this.ctx.body = msg;
     }
   }
   return HomeController;
