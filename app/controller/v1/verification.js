@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 01:21:06
+ * @Last Modified time: 2017-06-23 01:23:04
  */
 'use strict';
 
@@ -30,15 +30,16 @@ module.exports = app => {
     async create() {
       const { ctx } = this;
       const body = ctx.request.body;
-      console.log(body);
+      console.log('body===', body);
       const query = ctx.query;
-      console.log(query);
-      
+      console.log('query===', query);
+
       query.encrypt = body.encrypt;
       ctx.validate(createRule, query);
       this.signatureValid(query, body.encrypt);
       // const key = '4g5j64qlyl3zvetqxz5jiocdr586fn2zvjpa8zls3ij';
       const msg = this.decrypt(body.encrypt, this.app.config.aes_key);
+      console.log('msg===', msg);
 
       const aesMsg = this.encrypt(
         { Random: msg.Random },
@@ -52,6 +53,7 @@ module.exports = app => {
         nonce,
         encrypt: aesMsg,
       };
+      console.log('result===', result);
 
       // const msg2 = this.decrypt(aesMsg, key);
       ctx.body = result;
