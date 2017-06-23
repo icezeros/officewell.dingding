@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 00:44:24
+ * @Last Modified time: 2017-06-23 10:40:38
  */
 
 'use strict';
@@ -98,7 +98,11 @@ module.exports = app => {
       buf += aa;
 
       buf += new Buffer(data);
-      buf += new Buffer(this.app.config.suiteKey);
+      // buf += new Buffer(this.app.config.suiteKey);
+      const bb = new Buffer(27);
+      bb.write('suite4xxxxxxxxxxxxxxx');
+
+      buf += bb;
 
       let crypted = cipher.update(buf, 'utf8', 'binary');
       crypted += cipher.final('binary');
