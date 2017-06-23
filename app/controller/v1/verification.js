@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 18:11:54
+ * @Last Modified time: 2017-06-23 18:15:35
  */
 'use strict';
 
@@ -30,21 +30,13 @@ module.exports = app => {
     async create() {
       const { ctx } = this;
       const body = ctx.request.body;
-      console.log('body===', body);
       const query = ctx.query;
-      console.log('query===', query);
-
       query.encrypt = body.encrypt;
       ctx.validate(createRule, query);
       this.signatureValid(query, body.encrypt);
-      // const key = '4g5j64qlyl3zvetqxz5jiocdr586fn2zvjpa8zls3ij';
-      // const msg = this.decrypt(body.encrypt, this.app.config.aes_key);
       const msg = this.dTalkApiUtil.decrypt(body.encrypt);
-      console.log('msg===', msg.message);
       const obj = JSON.parse(msg.message);
       const aesMsg = this.dTalkApiUtil.encrypt(obj.Random);
-      const timestamp = ctx.helper.moment().format('x');
-      const nonce = '123456';
       const result = {
         msg_signature: this.dTalkApiUtil.getSignature(
           query.timestamp,
@@ -55,12 +47,7 @@ module.exports = app => {
         nonce: query.nonce,
         encrypt: aesMsg,
       };
-
-      console.log('result===', result);
-
-      // const msg2 = this.decrypt(aesMsg, key);
       ctx.body = result;
-      // this.success(result);
     }
   }
   return HomeController;
