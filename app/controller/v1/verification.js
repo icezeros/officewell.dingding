@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 10:59:06
+ * @Last Modified time: 2017-06-23 13:52:34
  */
 'use strict';
 
@@ -45,7 +45,7 @@ module.exports = app => {
         { Random: msg.Random },
         this.app.config.aes_key
       );
-      const timeStamp = ctx.helper.moment().unix();
+      const timeStamp = ctx.helper.moment().format('x');
       const nonce = 123456;
       const result = {
         msg_signature: this.signatureGet(timeStamp, nonce, aesMsg),
