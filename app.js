@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 10:40:38
+ * @Last Modified time: 2017-06-23 10:55:20
  */
 
 'use strict';
@@ -93,6 +93,9 @@ module.exports = app => {
 
       const aa = new Buffer(4);
       // aa.writeInt32BE(97);
+      console.log('data', data);
+      console.log('data.length', data.length);
+
       aa.writeInt32BE(data.length);
 
       buf += aa;
