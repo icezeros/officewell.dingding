@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 18:06:19
+ * @Last Modified time: 2017-06-23 18:08:48
  */
 'use strict';
 
@@ -41,14 +41,18 @@ module.exports = app => {
       // const msg = this.decrypt(body.encrypt, this.app.config.aes_key);
       const msg = this.dTalkApiUtil.decrypt(body.encrypt);
       console.log('msg===', msg.message);
-      const obj = JSON.parse(msg.message)
+      const obj = JSON.parse(msg.message);
       const aesMsg = this.dTalkApiUtil.encrypt(obj.Random);
       const timestamp = ctx.helper.moment().format('x');
       const nonce = '123456';
       const result = {
-        msg_signature: this.dTalkApiUtil.getSignature(timestamp, nonce, aesMsg),
-        timestamp,
-        nonce,
+        msg_signature: this.dTalkApiUtil.getSignature(
+          query.timestamp,
+          query.nonce,
+          aesMsg
+        ),
+        timestamp: query.timestamp,
+        nonce: query.nonce,
         encrypt: aesMsg,
       };
 
