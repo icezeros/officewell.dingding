@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 13:56:09
+ * @Last Modified time: 2017-06-23 13:58:02
  */
 'use strict';
 
@@ -45,18 +45,18 @@ module.exports = app => {
         { Random: msg.Random },
         this.app.config.aes_key
       );
-      const timeStamp = ctx.helper.moment().format('x');
+      const timestamp = ctx.helper.moment().format('x');
       const nonce = 123456;
       // const result = {
-      //   msg_signature: this.signatureGet(timeStamp, nonce, aesMsg),
-      //   timeStamp,
+      //   msg_signature: this.signatureGet(timestamp, nonce, aesMsg),
+      //   timestamp,
       //   nonce,
       //   encrypt: aesMsg,
       // };
       const result = {
-        msg_signature: this.signatureGet(timeStamp, nonce, body.encrypt),
-        timestamp: query.timestamp,
-        nonce: query.nonce,
+        msg_signature: this.signatureGet(timestamp, nonce, body.encrypt),
+        timestamp,
+        nonce,
         encrypt: body.encrypt,
       };
       console.log('result===', result);
