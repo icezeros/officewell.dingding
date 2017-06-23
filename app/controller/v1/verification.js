@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 10:46:04
+ * @Last Modified time: 2017-06-23 10:59:06
  */
 'use strict';
 
@@ -41,7 +41,10 @@ module.exports = app => {
       const msg = this.decrypt(body.encrypt, this.app.config.aes_key);
       console.log('msg===', msg);
 
-      const aesMsg = this.encrypt(msg.Random, this.app.config.aes_key);
+      const aesMsg = this.encrypt(
+        { Random: msg.Random },
+        this.app.config.aes_key
+      );
       const timeStamp = ctx.helper.moment().unix();
       const nonce = 123456;
       const result = {
