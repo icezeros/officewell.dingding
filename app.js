@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 10:55:20
+ * @Last Modified time: 2017-06-23 10:56:34
  */
 
 'use strict';
@@ -78,7 +78,7 @@ module.exports = app => {
      */
 
     encrypt(data, key) {
-      data = JSON.stringify(data);
+      // data = JSON.stringify(data);
       key = new Buffer(key, 'base64');
       const iv = key.slice(0, 16);
       const cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
