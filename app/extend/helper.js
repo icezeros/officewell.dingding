@@ -1,7 +1,7 @@
-"use strict";
-const _ = require("lodash");
-const moment = require("moment");
-const R = require("ramda");
+'use strict';
+const _ = require('lodash');
+const moment = require('moment');
+const R = require('ramda');
 // _.moment = moment;
 module.exports = {
   get _() {
@@ -35,5 +35,5 @@ module.exports = {
     if (!moment(time).isValid()) return false;
 
     return time;
-  }
+  },
 };

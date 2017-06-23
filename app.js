@@ -2,12 +2,13 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 10:59:13
+ * @Last Modified time: 2017-06-23 17:34:12
  */
 
 'use strict';
 const moment = require('moment');
 const crypto = require('crypto');
+const dTalkApiUtil = require('./app/extend/util').DTalkCrypt;
 
 module.exports = app => {
   app.beforeStart(function* () {
@@ -67,6 +68,14 @@ module.exports = app => {
     }
     redirect() {
       this.ctx.body = 'test';
+    }
+
+    get dTalkApiUtil() {
+      return new dTalkApiUtil(
+        this.app.config.ddToken,
+        this.app.config.aes_key,
+        this.app.config.suiteKey
+      );
     }
 
     /**

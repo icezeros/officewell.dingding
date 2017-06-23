@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 14:00:57
+ * @Last Modified time: 2017-06-23 17:58:37
  */
 'use strict';
 
@@ -38,27 +38,20 @@ module.exports = app => {
       ctx.validate(createRule, query);
       this.signatureValid(query, body.encrypt);
       // const key = '4g5j64qlyl3zvetqxz5jiocdr586fn2zvjpa8zls3ij';
-      const msg = this.decrypt(body.encrypt, this.app.config.aes_key);
-      console.log('msg===', msg);
+      // const msg = this.decrypt(body.encrypt, this.app.config.aes_key);
+      const msg = this.dTalkApiUtil.decrypt(body.encrypt);
+      console.log('msg===', msg.message);
 
-      const aesMsg = this.encrypt(
-        { Random: msg.Random },
-        this.app.config.aes_key
-      );
+      const aesMsg = this.dTalkApiUtil.encrypt(msg.message.Random);
       const timestamp = ctx.helper.moment().format('x');
       const nonce = '123456';
-      // const result = {
-      //   msg_signature: this.signatureGet(timestamp, nonce, aesMsg),
-      //   timestamp,
-      //   nonce,
-      //   encrypt: aesMsg,
-      // };
       const result = {
-        msg_signature: this.signatureGet(timestamp, nonce, body.encrypt),
-        timeStamp: timestamp,
+        msg_signature: this.dTalkApiUtil.getSignature(timestamp, nonce, aesMsg),
+        timestamp,
         nonce,
-        encrypt: body.encrypt,
+        encrypt: aesMsg,
       };
+
       console.log('result===', result);
 
       // const msg2 = this.decrypt(aesMsg, key);
