@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 18:08:48
+ * @Last Modified time: 2017-06-23 18:11:54
  */
 'use strict';
 
@@ -51,7 +51,7 @@ module.exports = app => {
           query.nonce,
           aesMsg
         ),
-        timestamp: query.timestamp,
+        timeStamp: query.timestamp,
         nonce: query.nonce,
         encrypt: aesMsg,
       };
