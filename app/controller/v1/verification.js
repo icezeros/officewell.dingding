@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 13:52:34
+ * @Last Modified time: 2017-06-23 13:56:09
  */
 'use strict';
 
@@ -47,18 +47,18 @@ module.exports = app => {
       );
       const timeStamp = ctx.helper.moment().format('x');
       const nonce = 123456;
-      const result = {
-        msg_signature: this.signatureGet(timeStamp, nonce, aesMsg),
-        timeStamp,
-        nonce,
-        encrypt: aesMsg,
-      };
       // const result = {
-      //   msg_signature: query.signature,
-      //   timestamp: query.timestamp,
-      //   nonce: query.nonce,
-      //   encrypt: body.encrypt,
+      //   msg_signature: this.signatureGet(timeStamp, nonce, aesMsg),
+      //   timeStamp,
+      //   nonce,
+      //   encrypt: aesMsg,
       // };
+      const result = {
+        msg_signature: this.signatureGet(timeStamp, nonce, body.encrypt),
+        timestamp: query.timestamp,
+        nonce: query.nonce,
+        encrypt: body.encrypt,
+      };
       console.log('result===', result);
 
       // const msg2 = this.decrypt(aesMsg, key);
