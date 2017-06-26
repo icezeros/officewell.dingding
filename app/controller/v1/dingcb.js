@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-26 10:53:13
+ * @Last Modified time: 2017-06-26 11:25:53
  */
 'use strict';
 
@@ -49,23 +49,23 @@ module.exports = app => {
           break;
         // 定时推送Ticket
         case 'suite_ticket':
-          data = await service.checkCreateSuiteUrl(obj);
+          data = await service.suiteTicket(obj);
           break;
         // 企业授权微应用后推送临时授权码
         case 'tmp_auth_code':
-          data = await service.checkCreateSuiteUrl(obj);
+          data = await service.tmpAuthCode(obj);
           break;
         // 授权变更后（如通讯录范围）
         case 'change_auth':
-          data = await service.checkCreateSuiteUrl(obj);
+          data = await service.changeAuth(obj);
           break;
         // 套件信息更新”事件）
         case 'check_update_suite_url':
-          data = await service.checkCreateSuiteUrl(obj);
+          data = await service.checkUpdateSuiteUrl(obj);
           break;
         // 解除授权
         case 'suite_relieve':
-          data = await service.checkCreateSuiteUrl(obj);
+          data = await service.suiteRelieve(obj);
           break;
         default:
           data = await service.checkCreateSuiteUrl(obj);
