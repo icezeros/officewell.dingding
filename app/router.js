@@ -2,5 +2,5 @@
 
 module.exports = app => {
   app.get('/', 'home.index');
-  app.resources('verification', '/v1/verification', 'v1.verification');
+  app.resources('dingcb', '/v1/dingcb', 'v1.dingcb');
 };

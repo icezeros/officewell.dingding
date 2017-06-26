@@ -5,4 +5,9 @@
 exports.validate = {
   enable: true,
   package: 'egg-validate',
-}
+};
+
+exports.mongoose = {
+  enable: false,
+  package: 'egg-mongoose',
+};

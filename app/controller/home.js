@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 17:36:32
+ * @Last Modified time: 2017-06-23 19:25:45
  */
 'use strict';
 
@@ -14,7 +14,7 @@ module.exports = app => {
       // const key = '4g5j64qlyl3zvetqxz5jiocdr586fn2zvjpa8zls3ij';
       // const msg = this.decrypt(aesMsg, key);
       // console.log('===     ', msg);
-      const data = this.dTalkApiUtil.encrypt('asdffasdfsf');
+      const data = await this.dTalkApiUtil.encrypt('asdffasdfsf');
       console.log(data);
 
       // const mm = this.encrypt('{"EventType":"check_create_suite_url","Random":"LPIdSnlF","TestSuiteKey":"suite4xxxxxxxxxxxxxxx"}', key);

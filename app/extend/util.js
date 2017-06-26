@@ -54,6 +54,7 @@ const DTalkCrypt = function(token, encodingAESKey, id) {
  * @param {String} timestamp    时间戳
  * @param {String} nonce        随机数
  * @param {String} encrypt      加密后的文本
+ * @return {String} signature   签名
  */
 DTalkCrypt.prototype.getSignature = function(timestamp, nonce, encrypt) {
   const shasum = crypto.createHash('sha1');

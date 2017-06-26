@@ -73,7 +73,7 @@ module.exports = app => {
     get dTalkApiUtil() {
       return new dTalkApiUtil(
         this.app.config.ddToken,
-        this.app.config.aes_key,
+        this.app.config.aesKey,
         this.app.config.suiteKey
       );
     }

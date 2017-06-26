@@ -8,7 +8,8 @@ module.exports = appInfo => {
   config.middleware = [ 'errorHandler' ];
   config.ddToken = '123456';
   config.suiteKey = 'suitejrn329ssum6e2iki';
-  config.aes_key = '5p95wcajc9no5p4v9ailj863u7gnf47zopkoj0vakl6';
+  config.aesKey = '5p95wcajc9no5p4v9ailj863u7gnf47zopkoj0vakl6';
+  config.suiteSecret = 'CgSxWaHy0faBelBWZrJlETAC2XPcdWk4R4Leun1POmH_YjY7z1rZpuDaLIN_4FeJ';
   // config
 
   config.security = {
