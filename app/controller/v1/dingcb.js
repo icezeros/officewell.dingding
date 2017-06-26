@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-26 10:29:56
+ * @Last Modified time: 2017-06-26 10:53:13
  */
 'use strict';
 
@@ -37,6 +37,7 @@ module.exports = app => {
       this.signatureValid(query, body.encrypt);
       // 解密
       const msg = this.dTalkApiUtil.decrypt(body.encrypt);
+
       if (msg.id !== this.app.config.suiteKey) ctx.throw(409);
       const obj = JSON.parse(msg.message);
       // if(obj.EventType === 'check_create_suite_url')
@@ -44,30 +45,30 @@ module.exports = app => {
       switch (obj.EventType) {
         // 套件注册事件
         case 'check_create_suite_url':
-          data = service.checkCreateSuiteUrl(obj);
+          data = await service.checkCreateSuiteUrl(obj);
           break;
         // 定时推送Ticket
         case 'suite_ticket':
-          data = service.checkCreateSuiteUrl(obj);
+          data = await service.checkCreateSuiteUrl(obj);
           break;
         // 企业授权微应用后推送临时授权码
         case 'tmp_auth_code':
-          data = service.checkCreateSuiteUrl(obj);
+          data = await service.checkCreateSuiteUrl(obj);
           break;
         // 授权变更后（如通讯录范围）
         case 'change_auth':
-          data = service.checkCreateSuiteUrl(obj);
+          data = await service.checkCreateSuiteUrl(obj);
           break;
         // 套件信息更新”事件）
         case 'check_update_suite_url':
-          data = service.checkCreateSuiteUrl(obj);
+          data = await service.checkCreateSuiteUrl(obj);
           break;
         // 解除授权
         case 'suite_relieve':
-          data = service.checkCreateSuiteUrl(obj);
+          data = await service.checkCreateSuiteUrl(obj);
           break;
         default:
-          data = service.checkCreateSuiteUrl(obj);
+          data = await service.checkCreateSuiteUrl(obj);
           break;
       }
       const aesMsg = this.dTalkApiUtil.encrypt(data);
