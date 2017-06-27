@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-26 11:25:53
+ * @Last Modified time: 2017-06-27 15:34:58
  */
 'use strict';
 
@@ -29,7 +29,7 @@ module.exports = app => {
 
     async create() {
       const { ctx } = this;
-      const service = ctx.service.callback;
+      const callbackService = ctx.service.callback;
       const body = ctx.request.body;
       const query = ctx.query;
       query.encrypt = body.encrypt;
@@ -40,37 +40,40 @@ module.exports = app => {
 
       if (msg.id !== this.app.config.suiteKey) ctx.throw(409);
       const obj = JSON.parse(msg.message);
+      console.log(obj);
       // if(obj.EventType === 'check_create_suite_url')
       let data;
       switch (obj.EventType) {
         // 套件注册事件
         case 'check_create_suite_url':
-          data = await service.checkCreateSuiteUrl(obj);
+          data = await callbackService.checkCreateSuiteUrl(obj);
           break;
         // 定时推送Ticket
         case 'suite_ticket':
-          data = await service.suiteTicket(obj);
+          data = await callbackService.suiteTicket(obj);
           break;
         // 企业授权微应用后推送临时授权码
         case 'tmp_auth_code':
-          data = await service.tmpAuthCode(obj);
+          data = await callbackService.tmpAuthCode(obj);
           break;
         // 授权变更后（如通讯录范围）
         case 'change_auth':
-          data = await service.changeAuth(obj);
+          data = await callbackService.changeAuth(obj);
           break;
         // 套件信息更新”事件）
         case 'check_update_suite_url':
-          data = await service.checkUpdateSuiteUrl(obj);
+          data = await callbackService.checkUpdateSuiteUrl(obj);
           break;
         // 解除授权
         case 'suite_relieve':
-          data = await service.suiteRelieve(obj);
+          data = await callbackService.suiteRelieve(obj);
           break;
         default:
-          data = await service.checkCreateSuiteUrl(obj);
+          data = await callbackService.checkCreateSuiteUrl(obj);
           break;
       }
+      console.log('data', data);
+
       const aesMsg = this.dTalkApiUtil.encrypt(data);
       const result = {
         msg_signature: this.dTalkApiUtil.getSignature(
