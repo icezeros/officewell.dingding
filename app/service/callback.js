@@ -2,7 +2,7 @@
  * @Author: hgs
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: hgs
- * @Last Modified time: 2017-06-26 10:18:12
+ * @Last Modified time: 2017-06-27 15:37:11
  */
 
 'use strict';
@@ -45,7 +45,7 @@ module.exports = app => {
       return data;
     }
     async checkUpdateSuiteUrl(data) {
-      return data;
+      return data.Random;
     }
     async suiteRelieve(data) {
       return data;
