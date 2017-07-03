@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 17:16:46
+ * @Last Modified time: 2017-07-03 17:52:42
  */
 
 'use strict';
@@ -86,6 +86,22 @@ module.exports = app => {
         corpid: urlData.auth_corp_info.corpid,
         corpName: urlData.auth_corp_info.corp_name,
       });
+      console.log('orgData.data', orgData.data);
+      
+      const activateResult = await ctx.curl(
+        config.activateSuite + '?suite_access_token=' + suiteToken,
+        {
+          method: 'POST',
+          contentType: 'json',
+          data: {
+            suite_key: config.suiteKey,
+            auth_corpid: orgData.corpid,
+            permanent_code: orgData.permanentCode,
+          },
+          dataType: 'json',
+        }
+      );
+      console.log('activateResult.data', activateResult.data);
 
       return 'success';
     }

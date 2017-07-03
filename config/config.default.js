@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-27 15:41:13
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 16:16:46
+ * @Last Modified time: 2017-07-03 17:42:46
  */
 'use strict';
 
@@ -23,6 +23,7 @@ module.exports = appInfo => {
   // 获取企业永久授权码
   config.getPermanentCodeUrl =
     'https://oapi.dingtalk.com/service/get_permanent_code';
+  config.activateSuite = 'https://oapi.dingtalk.com/service/activate_suite';
   config.mongoose = {
     url: 'mongodb://officewell:proofficewell2017@47.93.50.25:27017/officewell',
   };
