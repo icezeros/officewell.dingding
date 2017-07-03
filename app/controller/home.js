@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 19:42:02
+ * @Last Modified time: 2017-07-03 19:48:16
  */
 'use strict';
 
@@ -27,7 +27,7 @@ module.exports = app => {
     async show() {
       this.ctx.body = (await this.ctx.curl(
         'https://oapi.dingtalk.com/service/get_auth_info?suite_access_token=' +
-          (await this.ctx.helper.getSuiteToken),
+          (await this.ctx.helper.getSuiteToken()),
         {
           method: 'POST',
           contentType: 'json',
