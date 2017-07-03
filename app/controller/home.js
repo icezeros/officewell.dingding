@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 16:00:50
+ * @Last Modified time: 2017-07-03 19:26:11
  */
 'use strict';
 
@@ -16,8 +16,10 @@ module.exports = app => {
       // console.log('===     ', msg);
       // const data = await this.dTalkApiUtil.encrypt('asdffasdfsf');
       // await this.ctx.service.callback.suiteTicket({ SuiteTicket: 'sdfs---fsg' });
-      const aa = await this.ctx.helper.getSuiteToken();
-      
+      // const aa = await this.ctx.helper.getSuiteToken();
+      const aa = await this.ctx.helper.getCorpToken(
+        'ding95c7228d2de5ea6c35c2f4657eb6378f'
+      );
 
       console.log(aa);
 
@@ -28,10 +30,8 @@ module.exports = app => {
       // console.log('===     ', msg);
       // const sss = await this.ctx.curl('http://www.baidu.com');
       // console.log(sss);
-      
 
       this.ctx.body = 'data';
-      
     }
   }
   return HomeController;

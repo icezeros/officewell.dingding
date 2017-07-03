@@ -83,24 +83,24 @@ module.exports = app => {
         permanentCode: urlData.permanent_code,
         chPermanentCode: urlData.ch_permanent_code,
         authCorpInfo: urlData.auth_corp_info,
-        corpid: urlData.auth_corp_info.corpid,
+        corpId: urlData.auth_corp_info.corpid,
         corpName: urlData.auth_corp_info.corp_name,
       });
       console.log('orgData.data', orgData);
       console.log('------', {
         suite_key: config.suiteKey,
-        auth_corpid: orgData.corpid,
+        auth_corpid: orgData.corpId,
         permanent_code: orgData.permanentCode,
       });
 
       const activateResult = await ctx.curl(
-        config.activateSuite + '?suite_access_token=' + suiteToken,
+        config.activateSuiteUrl + '?suite_access_token=' + suiteToken,
         {
           method: 'POST',
           contentType: 'json',
           data: {
             suite_key: config.suiteKey,
-            auth_corpid: orgData.corpid,
+            auth_corpid: orgData.corpId,
             permanent_code: orgData.permanentCode,
           },
           dataType: 'json',

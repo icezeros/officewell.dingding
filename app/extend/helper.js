@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 16:05:02
+ * @Last Modified time: 2017-07-03 19:30:09
  */
 'use strict';
 const _ = require('lodash');
@@ -81,9 +81,57 @@ module.exports = {
         );
         suiteToken = accessToken.accessToken;
       }
+    } else {
+      suiteToken = dingSysInfo.accessToken.accessToken;
     }
-    suiteToken = dingSysInfo.accessToken.accessToken;
 
     return suiteToken;
+  },
+
+  // 获取企业suiteToken
+  async getCorpToken(corpId) {
+    const ctx = this.ctx;
+    const config = this.app.config;
+    let corpToken;
+    const dingOrgInfo = await ctx.model.DingOrgInfo.findOne({
+      corpId,
+    });
+    if (!dingOrgInfo) {
+      throw new Error('data err');
+    }
+    
+    // 判断token是否超时
+    if (
+      !dingOrgInfo.accessToken ||
+      moment(dingOrgInfo.accessToken.expire).isBefore(moment())
+    ) {
+      const suiteToken = await this.getSuiteToken();
+      const urlData = await ctx.curl(
+        config.getCorpTokenUrl + '?suite_access_token=' + suiteToken,
+        {
+          method: 'POST',
+          contentType: 'json',
+          data: {
+            auth_corpid: corpId,
+            permanent_code: dingOrgInfo.permanentCode,
+          },
+          dataType: 'json',
+        }
+      );
+    console.log(urlData.data);
+      
+      if (urlData.status === 200) {
+        const accessToken = {
+          accessToken: urlData.data.access_token,
+          expire: moment().add(urlData.data.expires_in - 100, 's'),
+        };
+        await ctx.model.DingOrgInfo.update(corpId, { accessToken });
+        corpToken = accessToken.accessToken;
+      }
+    } else {
+      corpToken = dingOrgInfo.accessToken.accessToken;
+    }
+
+    return corpToken;
   },
 };

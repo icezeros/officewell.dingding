@@ -19,7 +19,7 @@ module.exports = app => {
       chPermanentCode: {
         type: String,
       },
-      corpid: {
+      corpId: {
         type: String,
         required: true,
       },
