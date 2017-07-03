@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 20:11:59
+ * @Last Modified time: 2017-07-03 20:12:45
  */
 'use strict';
 
@@ -30,7 +30,7 @@ module.exports = app => {
           ((await this.ctx.helper.getCorpToken(
             'ding95c7228d2de5ea6c35c2f4657eb6378f'
           )) +
-            'id=1')
+            '&id=1')
       )).data;
     }
   }
