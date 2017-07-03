@@ -1,3 +1,9 @@
+/*
+ * @Author: icezeros 
+ * @Date: 2017-07-03 13:49:47 
+ * @Last Modified by:   icezeros 
+ * @Last Modified time: 2017-07-03 13:49:47 
+ */
 'use strict';
 const _ = require('lodash');
 const moment = require('moment');
@@ -35,5 +41,43 @@ module.exports = {
     if (!moment(time).isValid()) return false;
 
     return time;
+  },
+  async getSuiteToken() {
+    const ctx = this.ctx;
+    const config = this.app.config;
+    let suiteToken;
+    const dingSysInfo = await ctx.model.DingSysInfo.findOne({
+      orgId: 'SYSTEM',
+    });
+    if (!dingSysInfo) {
+      throw new Error('data err');
+    }
+
+    // 判断token是否超时
+    if (moment(dingSysInfo.accessToken.expire).isBefore(moment())) {
+      const urlData = await ctx.curl(config.getSuiteAccessTokenUrl, {
+        method: 'POST',
+        contentType: 'json',
+        data: {
+          suite_key: config.suiteKey,
+          suite_secret: config.suiteSecret,
+          suite_ticket: dingSysInfo.suiteSecret,
+        },
+      });
+      if (urlData.status === 200) {
+        const accessToken = {
+          accessToken: urlData.data.suite_access_token,
+          expire: moment().add(urlData.data.expires_in - 100, 's'),
+        };
+        await ctx.model.DingSysInfo.update(
+          { orgId: 'SYSTEM' },
+          { accessToken }
+        );
+        suiteToken = accessToken.accessToken;
+      }
+    }
+    suiteToken = dingSysInfo.accessToken.accessToken;
+
+    return suiteToken;
   },
 };

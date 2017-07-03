@@ -1,8 +1,8 @@
 /*
- * @Author: hgs
+ * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
- * @Last Modified by: hgs
- * @Last Modified time: 2017-06-23 19:25:45
+ * @Last Modified by: icezeros
+ * @Last Modified time: 2017-07-03 13:28:45
  */
 'use strict';
 
@@ -14,16 +14,22 @@ module.exports = app => {
       // const key = '4g5j64qlyl3zvetqxz5jiocdr586fn2zvjpa8zls3ij';
       // const msg = this.decrypt(aesMsg, key);
       // console.log('===     ', msg);
-      const data = await this.dTalkApiUtil.encrypt('asdffasdfsf');
-      console.log(data);
+      // const data = await this.dTalkApiUtil.encrypt('asdffasdfsf');
+      await this.ctx.service.callback.suiteTicket({ SuiteTicket: 'sdfs---fsg' });
+      this.ctx.helper.getSuiteToken();
+      // console.log(data);
 
       // const mm = this.encrypt('{"EventType":"check_create_suite_url","Random":"LPIdSnlF","TestSuiteKey":"suite4xxxxxxxxxxxxxxx"}', key);
       // console.log('---     ', mm);
 
       // const msg = this.decrypt(mm, key);
       // console.log('===     ', msg);
+      const sss = await this.ctx.curl('http://www.baidu.com');
+      console.log(sss);
+      
 
-      this.ctx.body = data;
+      this.ctx.body = 'data';
+      
     }
   }
   return HomeController;

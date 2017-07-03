@@ -1,8 +1,8 @@
 /*
- * @Author: hgs
+ * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
- * @Last Modified by: hgs
- * @Last Modified time: 2017-06-27 15:37:11
+ * @Last Modified by: icezeros
+ * @Last Modified time: 2017-07-03 11:41:40
  */
 
 'use strict';
@@ -27,7 +27,19 @@ module.exports = app => {
      * @memberof Callback
      */
     async suiteTicket(data) {
-      console.log(data);
+      let result = await this.ctx.model.DingSysInfo.findOneAndUpdate(
+        { orgId: 'SYSTEM' },
+        { suiteTicket: data.SuiteTicket }
+      );
+      if (!result) {
+        result = await this.ctx.model.DingSysInfo.create({
+          orgId: 'SYSTEM',
+          SuiteTicket: data.SuiteTicket,
+        });
+      }
+      if (!result) {
+        return 'fail';
+      }
       return 'success';
     }
 

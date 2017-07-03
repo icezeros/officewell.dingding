@@ -1,7 +1,7 @@
 /*
- * @Author: hgs
+ * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
- * @Last Modified by: hgs
+ * @Last Modified by: icezeros
  * @Last Modified time: 2017-06-27 15:34:58
  */
 'use strict';

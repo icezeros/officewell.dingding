@@ -8,6 +8,6 @@ exports.validate = {
 };
 
 exports.mongoose = {
-  enable: false,
+  enable: true,
   package: 'egg-mongoose',
 };
