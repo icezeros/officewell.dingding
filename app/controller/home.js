@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 13:28:45
+ * @Last Modified time: 2017-07-03 15:09:36
  */
 'use strict';
 
@@ -15,17 +15,18 @@ module.exports = app => {
       // const msg = this.decrypt(aesMsg, key);
       // console.log('===     ', msg);
       // const data = await this.dTalkApiUtil.encrypt('asdffasdfsf');
-      await this.ctx.service.callback.suiteTicket({ SuiteTicket: 'sdfs---fsg' });
-      this.ctx.helper.getSuiteToken();
-      // console.log(data);
+      // await this.ctx.service.callback.suiteTicket({ SuiteTicket: 'sdfs---fsg' });
+      const aa = await this.ctx.helper.getSuiteToken();
+
+      // console.log(aa);
 
       // const mm = this.encrypt('{"EventType":"check_create_suite_url","Random":"LPIdSnlF","TestSuiteKey":"suite4xxxxxxxxxxxxxxx"}', key);
       // console.log('---     ', mm);
 
       // const msg = this.decrypt(mm, key);
       // console.log('===     ', msg);
-      const sss = await this.ctx.curl('http://www.baidu.com');
-      console.log(sss);
+      // const sss = await this.ctx.curl('http://www.baidu.com');
+      // console.log(sss);
       
 
       this.ctx.body = 'data';
