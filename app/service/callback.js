@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 17:11:18
+ * @Last Modified time: 2017-07-03 17:14:43
  */
 
 'use strict';
@@ -59,9 +59,13 @@ module.exports = app => {
 
       // 企业临时授权码
       const AuthCode = data.AuthCode;
-      const suiteTicket = await helper.getSuiteToken;
+      const suiteToken = await helper.getSuiteToken;
+      console.log(
+        'config.getPermanentCodeUrl?suite_access_token=' + suiteToken
+      );
+
       const urlResult = await ctx.curl(
-        config.getPermanentCodeUrl + '?suite_access_token=' + suiteTicket,
+        config.getPermanentCodeUrl + '?suite_access_token=' + suiteToken,
         {
           method: 'POST',
           contentType: 'json',
