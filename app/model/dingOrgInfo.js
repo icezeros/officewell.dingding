@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-12 16:00:02
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 17:29:08
+ * @Last Modified time: 2017-07-03 17:30:57
  */
 'use strict';
 module.exports = app => {
@@ -18,10 +18,6 @@ module.exports = app => {
       },
       chPermanentCode: {
         type: String,
-      },
-      authCorpInfo: {
-        type: String,
-        required: true,
       },
       corpid: {
         type: String,
