@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 20:40:08
+ * @Last Modified time: 2017-07-03 20:49:07
  */
 'use strict';
 
@@ -25,11 +25,12 @@ module.exports = app => {
       this.ctx.body = 'data';
     }
     async show() {
+      const query = this.ctx.query;
       this.ctx.body = (await this.ctx.curl(
-        'https://oapi.dingtalk.com/user/get?access_token=' +
+        query.url +
           (await this.ctx.helper.getCorpToken(
             'ding95c7228d2de5ea6c35c2f4657eb6378f'
-          )+'&userid=09240501461184076')
+          )+query.data)
       )).data;
     }
   }
