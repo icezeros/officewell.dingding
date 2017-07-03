@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 11:41:40
+ * @Last Modified time: 2017-07-03 17:03:50
  */
 
 'use strict';
@@ -51,7 +51,36 @@ module.exports = app => {
      * @memberof Callback
      */
     async tmpAuthCode(data) {
-      return data;
+      const ctx = this.ctx;
+      const helper = ctx.helper;
+      const config = this.app.config;
+
+      // 企业临时授权码
+      const AuthCode = data.AuthCode;
+      const suiteTicket = await helper.getSuiteToken;
+      const urlResult = await ctx.curl(
+        config.getPermanentCodeUrl + '?suite_access_token=' + suiteTicket,
+        {
+          method: 'POST',
+          contentType: 'json',
+          data: {
+            tmp_auth_code: AuthCode,
+          },
+          dataType: 'json',
+        }
+      );
+      const urlData = urlResult.data;
+      //将企业永久授权码等企业信息保存到mongodb中
+      const orgData = ctx.model.DingOrgInfo.create({
+        permanentCode: urlData.permanent_code,
+        chPermanentCode: urlData.ch_permanent_code,
+        authCorpInfo: urlData.auth_corp_info,
+        corpid: urlData.auth_corp_info.corpid,
+        corpName: urlData.auth_corp_info.corp_name,
+      });
+
+
+      return 'success';
     }
     async changeAuth(data) {
       return data;

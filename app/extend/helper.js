@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 15:40:52
+ * @Last Modified time: 2017-07-03 16:05:02
  */
 'use strict';
 const _ = require('lodash');
@@ -42,6 +42,8 @@ module.exports = {
 
     return time;
   },
+
+  // 获取suiteToken
   async getSuiteToken() {
     const ctx = this.ctx;
     const config = this.app.config;
@@ -58,24 +60,16 @@ module.exports = {
       !dingSysInfo.accessToken ||
       moment(dingSysInfo.accessToken.expire).isBefore(moment())
     ) {
-      console.log({
-        suite_key: config.suiteKey,
-        suite_secret: config.suiteSecret,
-        suite_ticket: dingSysInfo.suiteTicket,
-      });
-
       const urlData = await ctx.curl(config.getSuiteAccessTokenUrl, {
         method: 'POST',
         contentType: 'json',
         data: {
           suite_key: config.suiteKey,
-          suitesecret: config.suiteSecret,
-          suite_ticket: dingSysInfo.suiteSecret,
+          suite_secret: config.suiteSecret,
+          suite_ticket: dingSysInfo.suiteTicket,
         },
         dataType: 'json',
       });
-      console.log(urlData.data);
-
       if (urlData.status === 200) {
         const accessToken = {
           accessToken: urlData.data.suite_access_token,

@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 15:09:36
+ * @Last Modified time: 2017-07-03 16:00:50
  */
 'use strict';
 
@@ -17,8 +17,9 @@ module.exports = app => {
       // const data = await this.dTalkApiUtil.encrypt('asdffasdfsf');
       // await this.ctx.service.callback.suiteTicket({ SuiteTicket: 'sdfs---fsg' });
       const aa = await this.ctx.helper.getSuiteToken();
+      
 
-      // console.log(aa);
+      console.log(aa);
 
       // const mm = this.encrypt('{"EventType":"check_create_suite_url","Random":"LPIdSnlF","TestSuiteKey":"suite4xxxxxxxxxxxxxxx"}', key);
       // console.log('---     ', mm);
