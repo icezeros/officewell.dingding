@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 17:03:50
+ * @Last Modified time: 2017-07-03 17:11:18
  */
 
 'use strict';
@@ -51,6 +51,8 @@ module.exports = app => {
      * @memberof Callback
      */
     async tmpAuthCode(data) {
+      console.log('data', data);
+
       const ctx = this.ctx;
       const helper = ctx.helper;
       const config = this.app.config;
@@ -69,8 +71,10 @@ module.exports = app => {
           dataType: 'json',
         }
       );
+      console.log('urlResult.data', urlResult.data);
+
       const urlData = urlResult.data;
-      //将企业永久授权码等企业信息保存到mongodb中
+      // 将企业永久授权码等企业信息保存到mongodb中
       const orgData = ctx.model.DingOrgInfo.create({
         permanentCode: urlData.permanent_code,
         chPermanentCode: urlData.ch_permanent_code,
@@ -78,7 +82,6 @@ module.exports = app => {
         corpid: urlData.auth_corp_info.corpid,
         corpName: urlData.auth_corp_info.corp_name,
       });
-
 
       return 'success';
     }
