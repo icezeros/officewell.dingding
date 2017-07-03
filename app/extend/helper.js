@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 19:30:09
+ * @Last Modified time: 2017-07-03 19:33:27
  */
 'use strict';
 const _ = require('lodash');
@@ -99,7 +99,7 @@ module.exports = {
     if (!dingOrgInfo) {
       throw new Error('data err');
     }
-    
+
     // 判断token是否超时
     if (
       !dingOrgInfo.accessToken ||
@@ -118,8 +118,6 @@ module.exports = {
           dataType: 'json',
         }
       );
-    console.log(urlData.data);
-      
       if (urlData.status === 200) {
         const accessToken = {
           accessToken: urlData.data.access_token,

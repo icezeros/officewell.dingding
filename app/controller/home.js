@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 19:26:11
+ * @Last Modified time: 2017-07-03 19:42:02
  */
 'use strict';
 
@@ -22,16 +22,22 @@ module.exports = app => {
       );
 
       console.log(aa);
-
-      // const mm = this.encrypt('{"EventType":"check_create_suite_url","Random":"LPIdSnlF","TestSuiteKey":"suite4xxxxxxxxxxxxxxx"}', key);
-      // console.log('---     ', mm);
-
-      // const msg = this.decrypt(mm, key);
-      // console.log('===     ', msg);
-      // const sss = await this.ctx.curl('http://www.baidu.com');
-      // console.log(sss);
-
       this.ctx.body = 'data';
+    }
+    async show() {
+      this.ctx.body = (await this.ctx.curl(
+        'https://oapi.dingtalk.com/service/get_auth_info?suite_access_token=' +
+          (await this.ctx.helper.getSuiteToken),
+        {
+          method: 'POST',
+          contentType: 'json',
+          data: {
+            suite_key: this.app.config.suiteKey,
+            auth_corpid: 'ding95c7228d2de5ea6c35c2f4657eb6378f',
+          },
+          dataType: 'json',
+        }
+      )).data;
     }
   }
   return HomeController;
