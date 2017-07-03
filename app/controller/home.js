@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 20:11:11
+ * @Last Modified time: 2017-07-03 20:11:59
  */
 'use strict';
 
@@ -26,7 +26,7 @@ module.exports = app => {
     }
     async show() {
       this.ctx.body = (await this.ctx.curl(
-        'https://oapi.dingtalk.com/department/get?access_token' +
+        'https://oapi.dingtalk.com/department/get?access_token=' +
           ((await this.ctx.helper.getCorpToken(
             'ding95c7228d2de5ea6c35c2f4657eb6378f'
           )) +
