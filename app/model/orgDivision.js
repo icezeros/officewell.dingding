@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 15:24:48
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 16:52:01
+ * @Last Modified time: 2017-07-04 18:07:37
  */
 
 'use strict';
@@ -52,10 +52,10 @@ module.exports = app => {
         deptHiding: {
           type: Boolean,
         },
-        deptPermits: {
+        deptPerimits: {
           type: String,
         },
-        userPermits: {
+        userPerimits: {
           type: String,
         },
         outerDept: {
