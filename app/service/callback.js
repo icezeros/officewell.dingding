@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 16:03:24
+ * @Last Modified time: 2017-07-04 16:14:51
  */
 
 'use strict';
@@ -92,8 +92,8 @@ module.exports = app => {
       console.log('orgData.data', orgData);
       console.log('------', {
         suite_key: config.suiteKey,
-        auth_corpid: orgData.corpId,
-        permanent_code: orgData.permanentCode,
+        auth_corpid: orgData.ding.corpId,
+        permanent_code: orgData.ding.permanentCode,
       });
 
       const activateResult = await ctx.curl(
@@ -103,8 +103,8 @@ module.exports = app => {
           contentType: 'json',
           data: {
             suite_key: config.suiteKey,
-            auth_corpid: orgData.corpId,
-            permanent_code: orgData.permanentCode,
+            auth_corpid: orgData.ding.corpId,
+            permanent_code: orgData.ding.permanentCode,
           },
           dataType: 'json',
         }
