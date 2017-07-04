@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 16:19:19
+ * @Last Modified time: 2017-07-04 16:25:22
  */
 'use strict';
 const _ = require('lodash');
@@ -100,6 +100,8 @@ module.exports = {
       throw new Error('data err');
     }
 
+    console.log('dingOrgInfo======', dingOrgInfo);
+
     // 判断token是否超时
     if (
       !dingOrgInfo.ding.accessToken ||
@@ -118,14 +120,19 @@ module.exports = {
           dataType: 'json',
         }
       );
+      console.log('urlData.data======', urlData.data);
+
       if (urlData.status === 200) {
         const accessToken = {
           accessToken: urlData.data.access_token,
           expire: moment().add(urlData.data.expires_in - 100, 's'),
         };
-        await ctx.model.OrgCompany.update(corpId, {
-          'ding.accessToken': accessToken,
-        });
+        await ctx.model.OrgCompany.update(
+          { 'ding.corpId': corpId },
+          {
+            'ding.accessToken': accessToken,
+          }
+        );
         corpToken = accessToken.accessToken;
       }
     } else {
