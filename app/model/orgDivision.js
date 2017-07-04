@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 15:24:48
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 18:13:42
+ * @Last Modified time: 2017-07-04 18:48:50
  */
 
 'use strict';
@@ -10,9 +10,6 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const orgDivisionSchema = new mongoose.Schema(
     {
-      // _id: {
-      //   type: String,
-      // },
       name: {
         type: String,
       },
@@ -80,11 +77,11 @@ module.exports = app => {
     },
     { collection: 'org_division' }
   );
-  // orgDivisionSchema.pre('save', function(next) {
-  //   // do stuff
-  //   this.createdAt = new Date();
-  //   next();
-  // });
+  orgDivisionSchema.pre('save', function(next) {
+    // do stuff
+    this.createdAt = new Date();
+    next();
+  });
   // orgDivisionSchema.pre('findOneAndUpdate', function(next) {
   //   // do stuff
   //   console.log('====------===');
