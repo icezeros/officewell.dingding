@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 17:49:08
+ * @Last Modified time: 2017-07-04 17:54:59
  */
 'use strict';
 
@@ -44,9 +44,11 @@ module.exports = app => {
           )) +
             query.data)
       );
+      console.log(data.data);
+      
       delete data.errcode;
       delete data.errmsg;
-      this.ctx.body = await this.ctx.service.orgDivision.create(data)
+      this.ctx.body = await this.ctx.service.orgDivision.create(data.data)
     }
   }
   return HomeController;
