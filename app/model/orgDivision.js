@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 15:24:48
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 18:07:37
+ * @Last Modified time: 2017-07-04 18:13:42
  */
 
 'use strict';
@@ -38,6 +38,9 @@ module.exports = app => {
         name: {
           type: String,
           required: true,
+        },
+        parentid: {
+          type: String,
         },
         order: {
           type: Number,
