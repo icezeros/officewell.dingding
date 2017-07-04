@@ -2,13 +2,15 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 17:39:52
+ * @Last Modified time: 2017-07-04 17:53:08
  */
 
 'use strict';
 module.exports = app => {
   class OrgDivision extends app.Service {
     async create(companyId, data) {
+      console.log(data);
+      
       const division = {
         name: data.name,
         companyId,
