@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 16:09:26
+ * @Last Modified time: 2017-07-04 16:19:19
  */
 'use strict';
 const _ = require('lodash');
@@ -102,8 +102,8 @@ module.exports = {
 
     // 判断token是否超时
     if (
-      !dingOrgInfo.accessToken ||
-      moment(dingOrgInfo.accessToken.expire).isBefore(moment())
+      !dingOrgInfo.ding.accessToken ||
+      moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment())
     ) {
       const suiteToken = await this.getSuiteToken();
       const urlData = await ctx.curl(
