@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 09:17:34
+ * @Last Modified time: 2017-07-04 17:49:08
  */
 'use strict';
 
@@ -28,10 +28,25 @@ module.exports = app => {
       const query = this.ctx.query;
       this.ctx.body = (await this.ctx.curl(
         query.url +
-          (await this.ctx.helper.getCorpToken(
+          ((await this.ctx.helper.getCorpToken(
             'ding95c7228d2de5ea6c35c2f4657eb6378f'
-          )+query.data)
+          )) +
+            query.data)
       )).data;
+    }
+
+    async create() {
+      const query = this.ctx.query;
+      const data = await this.ctx.curl(
+        'https://oapi.dingtalk.com/department/get?access_token=' +
+          ((await this.ctx.helper.getCorpToken(
+            'ding95c7228d2de5ea6c35c2f4657eb6378f'
+          )) +
+            query.data)
+      );
+      delete data.errcode;
+      delete data.errmsg;
+      this.ctx.body = await this.ctx.service.orgDivision.create(data)
     }
   }
   return HomeController;
