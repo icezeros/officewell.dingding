@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 19:33:27
+ * @Last Modified time: 2017-07-04 16:09:26
  */
 'use strict';
 const _ = require('lodash');
@@ -93,8 +93,8 @@ module.exports = {
     const ctx = this.ctx;
     const config = this.app.config;
     let corpToken;
-    const dingOrgInfo = await ctx.model.DingOrgInfo.findOne({
-      corpId,
+    const dingOrgInfo = await ctx.model.OrgCompany.findOne({
+      'ding.corpId': corpId,
     });
     if (!dingOrgInfo) {
       throw new Error('data err');
@@ -113,7 +113,7 @@ module.exports = {
           contentType: 'json',
           data: {
             auth_corpid: corpId,
-            permanent_code: dingOrgInfo.permanentCode,
+            permanent_code: dingOrgInfo.ding.permanentCode,
           },
           dataType: 'json',
         }
@@ -123,11 +123,13 @@ module.exports = {
           accessToken: urlData.data.access_token,
           expire: moment().add(urlData.data.expires_in - 100, 's'),
         };
-        await ctx.model.DingOrgInfo.update(corpId, { accessToken });
+        await ctx.model.OrgCompany.update(corpId, {
+          'ding.accessToken': accessToken,
+        });
         corpToken = accessToken.accessToken;
       }
     } else {
-      corpToken = dingOrgInfo.accessToken.accessToken;
+      corpToken = dingOrgInfo.ding.accessToken.accessToken;
     }
 
     return corpToken;

@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-03 18:10:16
+ * @Last Modified time: 2017-07-04 16:03:24
  */
 
 'use strict';
@@ -79,12 +79,15 @@ module.exports = app => {
 
       const urlData = urlResult.data;
       // 将企业永久授权码等企业信息保存到mongodb中
-      const orgData = await ctx.model.DingOrgInfo.create({
-        permanentCode: urlData.permanent_code,
-        chPermanentCode: urlData.ch_permanent_code,
-        authCorpInfo: urlData.auth_corp_info,
-        corpId: urlData.auth_corp_info.corpid,
-        corpName: urlData.auth_corp_info.corp_name,
+      const orgData = await ctx.model.OrgCompany.create({
+        name: urlData.auth_corp_info.corp_name,
+        ding: {
+          permanentCode: urlData.permanent_code,
+          chPermanentCode: urlData.ch_permanent_code,
+          authCorpInfo: urlData.auth_corp_info,
+          corpId: urlData.auth_corp_info.corpid,
+          corpName: urlData.auth_corp_info.corp_name,
+        },
       });
       console.log('orgData.data', orgData);
       console.log('------', {
