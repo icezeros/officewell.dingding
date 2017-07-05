@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 20:21:16
+ * @Last Modified time: 2017-07-05 20:32:53
  */
 
 'use strict';
@@ -38,6 +38,8 @@ module.exports = app => {
           nonce: query.nonce,
           encrypt: aesMsg,
         };
+      }
+      if (obj.EventType === 'user_add_org') {
       }
       // if()
       console.log(data);
