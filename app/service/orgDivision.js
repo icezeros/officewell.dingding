@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:38:11
+ * @Last Modified time: 2017-07-05 13:38:56
  */
 
 'use strict';
@@ -37,7 +37,7 @@ module.exports = app => {
 
       for (let i = 0; i < departmentIds.length; i++) {
         const departmentInfo = await this.getDingDivision(corpToken, corp.corpId, departmentIds[i]);
-        console.log(departmentInfo.data);
+        console.log(departmentInfo);
       }
 
 
