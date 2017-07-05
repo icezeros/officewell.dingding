@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 23:54:19
+ * @Last Modified time: 2017-07-05 23:58:14
  */
 
 'use strict';
@@ -98,7 +98,6 @@ module.exports = app => {
 
       delete data.userid;
       delete data.unionid;
-      delete data.companyId;
       function strToJson(str) {
         const json = new Function('return ' + str)();
         return json;
