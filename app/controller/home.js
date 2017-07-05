@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 19:02:15
+ * @Last Modified time: 2017-07-05 18:49:04
  */
 'use strict';
 
@@ -21,7 +21,6 @@ module.exports = app => {
         'ding95c7228d2de5ea6c35c2f4657eb6378f'
       );
 
-      console.log(aa);
       this.ctx.body = 'data';
     }
     async show() {
@@ -47,8 +46,6 @@ module.exports = app => {
           dataType: 'json',
         }
       );
-      console.log(data.data);
-
       delete data.errcode;
       delete data.errmsg;
       this.ctx.body = await this.ctx.service.orgDivision.create(

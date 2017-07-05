@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 18:44:46
+ * @Last Modified time: 2017-07-05 18:49:32
  */
 'use strict';
 const _ = require('lodash');
@@ -100,21 +100,11 @@ module.exports = {
       throw new Error('data err');
     }
 
-    console.log('dingOrgInfo======', dingOrgInfo);
-    console.log('--------------======', dingOrgInfo.ding);
-    console.log('--------------======', dingOrgInfo.ding.accessToken);
-    console.log('--------------======', !dingOrgInfo.ding.accessToken);
-    console.log(
-      '--------------======',
-      moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment())
-    );
-
     // 判断token是否超时
     if (
       !dingOrgInfo.ding.accessToken ||
       moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment().add(3, 's'))
     ) {
-      console.log('--------token-------');
 
       const suiteToken = await this.getSuiteToken();
       const urlData = await ctx.curl(

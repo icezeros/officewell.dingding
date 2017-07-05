@@ -39,7 +39,6 @@ module.exports = app => {
           dataType: 'json',
         }
       );
-      console.log(data.data);
 
       delete data.errcode;
       delete data.errmsg;

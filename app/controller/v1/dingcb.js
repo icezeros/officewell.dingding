@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-06-27 15:34:58
+ * @Last Modified time: 2017-07-05 18:49:10
  */
 'use strict';
 
@@ -20,10 +20,7 @@ module.exports = app => {
       // const aesMsg = 'ClskN5PFdfuTOlfWVp8GEuUrBf1Uagiu+29aimRYpB8CkFKVLJV0+IXkYWoUIQ1gXaICQ4GxL8E5Ry9Ie+MsUw==';
       const key = '4g5j64qlyl3zvetqxz5jiocdr586fn2zvjpa8zls3ij';
       const msg = this.decrypt(aesMsg, key);
-      console.log('===     ', msg);
       const mm = this.encrypt(msg.Random, key);
-      console.log('===     ', mm);
-
       this.ctx.body = mm;
     }
 
@@ -40,7 +37,6 @@ module.exports = app => {
 
       if (msg.id !== this.app.config.suiteKey) ctx.throw(409);
       const obj = JSON.parse(msg.message);
-      console.log(obj);
       // if(obj.EventType === 'check_create_suite_url')
       let data;
       switch (obj.EventType) {
@@ -72,7 +68,6 @@ module.exports = app => {
           data = await callbackService.checkCreateSuiteUrl(obj);
           break;
       }
-      console.log('data', data);
 
       const aesMsg = this.dTalkApiUtil.encrypt(data);
       const result = {
