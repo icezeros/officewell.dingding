@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:11:29
+ * @Last Modified time: 2017-07-05 15:17:56
  */
 
 'use strict';
@@ -23,10 +23,11 @@ module.exports = app => {
       const { helper } = ctx;
       const config = this.app.config;
       const corpToken = await helper.getCorpToken(corp.corpId);
-      const urlData = this.urlGet(config.getDepartUserListUrl, {
+      const urlData = await this.urlGet(config.getDepartUserListUrl, {
         corpToken,
         department_id,
       });
+
       const simpleList = urlData.data.userlist;
       for (let i = 0; i < simpleList.length; i++) {
         const tmpUserUrl = this.urlGet(config.getUser, {
@@ -43,7 +44,7 @@ module.exports = app => {
           userId: tmpUser,
         });
         console.log(result);
-        
+
       }
 
     }
