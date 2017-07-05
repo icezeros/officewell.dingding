@@ -38,11 +38,6 @@ module.exports = app => {
           access_token: corpToken,
           userid: tmpUserId,
         });
-        console.log({
-          access_token: corpToken,
-          userid: tmpUserId,
-        });
-        console.log(tmpUserUrl.data);
 
         if (tmpUserUrl.data.errcode !== 0) {
           this.logger.error('DingGetUserError:companyId:' + corp.companyId + simpleList + tmpUserUrl.data);
