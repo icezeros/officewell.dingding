@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 16:18:22
+ * @Last Modified time: 2017-07-05 16:21:19
  */
 
 "use strict";
@@ -65,6 +65,7 @@ module.exports = app => {
       data.companyId = companyId;
       data.orderInDepts = strToJson(data.orderInDepts);
       data.isLeaderInDepts = strToJson(data.isLeaderInDepts);
+      data.createdAt = new Date();
 
       delete data.userid;
       delete data.unionid;
