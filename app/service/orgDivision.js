@@ -2,46 +2,46 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 11:47:46
+ * @Last Modified time: 2017-07-05 12:02:51
  */
 
 'use strict';
 module.exports = app => {
   class OrgDivision extends app.Service {
     async authScopes(corp) {
-      const service = this;
-      const { ctx } = service;
+      const { ctx, urlGet } = this;
       const { helper } = ctx;
-      console.log('corp.corpId', corp.corpId);
-
+      // 获取企业token
       const corpToken = await helper.getCorpToken(corp.corpId);
-      console.log('corpToken', corpToken);
-
       const config = this.app.config;
+      // 企业部门id数组
       let departmentIds = [];
+      // 用户表
       let userIds = [];
       const urlResult = await this.urlGet(config.authScopesUrl, {
         access_token: corpToken,
       });
-      // departmentIds.push("");
-      // userIds.push("");
-
       departmentIds = departmentIds.concat(
         urlResult.data.auth_org_scopes.authed_dept
       );
+
       for (let i = 0; i < departmentIds.length; i++) {
-        const tmpDepartUrl = await this.urlGet(config.departmentListUrl, {
+        const tmpDepartUrl = await urlGet(config.departmentListUrl, {
           access_token: corpToken,
           id: departmentIds[i],
         });
-        console.log('tmpDepartUrl.data', tmpDepartUrl.data);
-
         const tmpDepartIds = tmpDepartUrl.data.department.map(item => item.id);
-        console.log('tmpDepartIds', tmpDepartIds);
-
         departmentIds = departmentIds.concat(tmpDepartIds);
 
       }
+
+      for (let i = 0; i < departmentIds.length; i++) {
+        const departmentInfo = await this.getDingDivision(corp.corpId, departmentIds[i]);
+        console.log(departmentInfo);
+        
+
+      }
+
 
       userIds = userIds.concat(urlResult.data.auth_org_scopes.authed_user);
       console.log('departmentIds=======', departmentIds);
@@ -83,9 +83,11 @@ module.exports = app => {
       const corpToken = await helper.getCorpToken(corpId);
       const urlResult = await this.urlGet(config.getDepartmentUrl, {
         access_token: corpToken,
-        id
+        id,
       });
       if (urlResult.status === 200 && urlResult.errcode === 0) {
+        delete urlResult.data.errcode;
+        delete urlResult.data.errmsg;
         return urlResult.data;
       }
       return false;
