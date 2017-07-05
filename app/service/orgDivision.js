@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:29:08
+ * @Last Modified time: 2017-07-05 13:30:37
  */
 
 'use strict';
@@ -18,7 +18,7 @@ module.exports = app => {
       let departmentIds = [];
       // 用户表
       let userIds = [];
-      const urlResult = await this.urlGet(config.authScopesUrl, {
+      const urlResult = await urlGet(config.authScopesUrl, {
         access_token: corpToken,
       });
 
