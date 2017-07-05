@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:39:15
+ * @Last Modified time: 2017-07-05 15:58:19
  */
 
 'use strict';
@@ -60,12 +60,16 @@ module.exports = app => {
       data.userId = data.userid;
       data.unionId = data.unionid;
       data.companyId = companyId;
-      data.orderInDepts = JSON.parse(data.orderInDepts);
-      data.isLeaderInDepts = JSON.parse(data.isLeaderInDepts);
+      data.orderInDepts = strToJson(data.orderInDepts);
+      data.isLeaderInDepts = strToJson(data.isLeaderInDepts);
 
       delete data.userid;
       delete data.unionid;
       delete data.companyId;
+      function strToJson(str) {
+        const json = (new Function("return " + str))();
+        return json;
+      }
       return data;
     }
   }
