@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 17:48:15
+ * @Last Modified time: 2017-07-05 17:52:10
  */
 
 "use strict";
@@ -67,7 +67,7 @@ module.exports = app => {
         await this.ctx.model.OrgDivision.findOneAndUpdate(
           {
             companyId: corp.companyId,
-            'ding.id': department.id,
+            'ding.id': department.ding.id,
           },
           department,
           { upsert: true }
