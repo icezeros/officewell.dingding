@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:23:46
+ * @Last Modified time: 2017-07-05 13:24:55
  */
 
 'use strict';
@@ -21,7 +21,6 @@ module.exports = app => {
       const urlResult = await this.urlGet(config.authScopesUrl, {
         access_token: corpToken,
       });
-      console.log('==========');
       
       departmentIds = departmentIds.concat(
         urlResult.data.auth_org_scopes.authed_dept
@@ -79,6 +78,9 @@ module.exports = app => {
     }
 
     async getDingDivision(corpId, id) {
+      console.log('==========');
+      console.log('==========');
+      
       const { ctx } = this;
       const { helper } = ctx;
       const config = this.app.config;
