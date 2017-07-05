@@ -2,10 +2,10 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 17:56:46
+ * @Last Modified time: 2017-07-05 18:11:21
  */
 
-'use strict';
+"use strict";
 module.exports = app => {
   class OrgDivision extends app.Service {
     async authScopes(corp) {
@@ -13,6 +13,8 @@ module.exports = app => {
       const { helper } = ctx;
       // 获取企业token
       const corpToken = await helper.getCorpToken(corp.corpId);
+      console.log("==========corpToken========", corpToken);
+
       const config = this.app.config;
       // 企业部门id数组
       let departmentIds = [];
@@ -86,7 +88,7 @@ module.exports = app => {
         name: data.name,
         createdAt: new Date(),
         companyId,
-        ding: data,
+        ding: data
       };
     }
 
