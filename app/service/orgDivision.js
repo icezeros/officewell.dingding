@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 11:43:27
+ * @Last Modified time: 2017-07-05 11:45:12
  */
 
 'use strict';
@@ -37,6 +37,8 @@ module.exports = app => {
         console.log('tmpDepartUrl.data', tmpDepartUrl.data);
 
         const tmpDepartIds = tmpDepartUrl.data.department.map(item => item.id);
+        console.log('tmpDepartIds', tmpDepartIds);
+        
         departmentIds.concat(tmpDepartIds);
       }
 
