@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 17:52:10
+ * @Last Modified time: 2017-07-05 17:54:01
  */
 
 "use strict";
@@ -67,7 +67,7 @@ module.exports = app => {
         await this.ctx.model.OrgDivision.findOneAndUpdate(
           {
             companyId: corp.companyId,
-            'ding.id': department.ding.id,
+            "ding.id": department.ding.id
           },
           department,
           { upsert: true }
@@ -84,8 +84,9 @@ module.exports = app => {
       delete data.errmsg;
       return {
         name: data.name,
+        createdAt: new Date(),
         companyId,
-        ding: data
+        ding: data,
       };
     }
 
