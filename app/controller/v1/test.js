@@ -2,14 +2,17 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 11:33:46
+ * @Last Modified time: 2017-07-05 14:02:26
  */
 'use strict';
 
 module.exports = app => {
   class TestController extends app.Controller {
     async index() {
-      this.ctx.service.orgDivision.authScopes({ corpId: 'ding95c7228d2de5ea6c35c2f4657eb6378f' });
+      this.ctx.service.orgDivision.authScopes({
+        companyId: 'sdffsdf',
+        corpId: 'ding95c7228d2de5ea6c35c2f4657eb6378f',
+      });
 
       this.ctx.body = 'data';
     }
