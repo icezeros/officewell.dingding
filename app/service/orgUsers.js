@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 00:04:08
+ * @Last Modified time: 2017-07-06 01:15:19
  */
 
 'use strict';
@@ -44,6 +44,7 @@ module.exports = app => {
           );
           continue;
         }
+        tmpUser.createdAt = new Date();
 
         const result = await this.ctx.model.DingUsers.findOneAndUpdate(
           { companyId: corp.companyId, userId: tmpUser.userId },
@@ -79,7 +80,7 @@ module.exports = app => {
       data.companyId = companyId;
       data.orderInDepts = strToJson(data.orderInDepts);
       data.isLeaderInDepts = strToJson(data.isLeaderInDepts);
-      data.createdAt = new Date();
+      // data.createdAt = new Date();
 
       delete data.userid;
       delete data.unionid;

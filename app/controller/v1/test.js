@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 00:49:00
+ * @Last Modified time: 2017-07-06 01:23:50
  */
 'use strict';
 
@@ -58,14 +58,28 @@ module.exports = app => {
           method: 'POST',
           contentType: 'json',
           data: {
-            call_back_tag: [
-              'user_add_org',
-              'user_modify_org',
-              'user_leave_org',
-            ],
+            call_back_tag: ['user_add_org', 'user_modify_org'],
             token: this.app.config.ddToken,
             aes_key: this.app.config.aesKey,
             url: 'http://47.93.50.25:7100/v1/user-add-org',
+          },
+          dataType: 'json',
+        }
+      );
+
+      await this.ctx.curl(
+        'https://oapi.dingtalk.com/call_back/register_call_back?access_token=' +
+          (await this.ctx.helper.getCorpToken(
+            'ding95c7228d2de5ea6c35c2f4657eb6378f'
+          )),
+        {
+          method: 'POST',
+          contentType: 'json',
+          data: {
+            call_back_tag: ['user_leave_org'],
+            token: this.app.config.ddToken,
+            aes_key: this.app.config.aesKey,
+            url: 'http://47.93.50.25:7100/v1/user-leave-org',
           },
           dataType: 'json',
         }
