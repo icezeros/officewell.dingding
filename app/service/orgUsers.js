@@ -2,10 +2,10 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:58:19
+ * @Last Modified time: 2017-07-05 16:18:22
  */
 
-'use strict';
+"use strict";
 module.exports = app => {
   class OrgUsers extends app.Service {
     async create(companyId, data) {
@@ -22,14 +22,13 @@ module.exports = app => {
       const { ctx } = this;
       const { helper } = ctx;
       const config = this.app.config;
-      console.log('corp-----', corp);
+      console.log("corp-----", corp);
 
       const corpToken = await helper.getCorpToken(corp.corpId);
       const urlData = await this.urlGet(config.getDepartUserListUrl, {
         access_token: corpToken,
         department_id,
       });
-
 
       const simpleList = urlData.data.userlist;
       for (let i = 0; i < simpleList.length; i++) {
@@ -40,20 +39,24 @@ module.exports = app => {
         });
 
         if (tmpUserUrl.data.errcode !== 0) {
-          this.logger.error('DingGetUserError:companyId:' + corp.companyId + simpleList + tmpUserUrl.data);
+          this.logger.error(
+            "DingGetUserError:companyId:" +
+              corp.companyId +
+              simpleList +
+              tmpUserUrl.data
+          );
           continue;
         }
         const tmpUser = this.dataFormat(corp.companyId, tmpUserUrl.data);
-        console.log('----------', tmpUser);
+        console.log("----------", tmpUser);
 
-        const result = await this.ctx.model.DingUsers.findOneAndUpdate({
-          companyId: corp.companyId,
-          userId: tmpUser,
-        });
+        const result = await this.ctx.model.DingUsers.findOneAndUpdate(
+          { companyId: corp.companyId, userId: tmpUser.userId },
+          tmpUser,
+          { upsert: true }
+        );
         console.log(result);
-
       }
-
     }
 
     dataFormat(companyId, data) {
@@ -67,7 +70,7 @@ module.exports = app => {
       delete data.unionid;
       delete data.companyId;
       function strToJson(str) {
-        const json = (new Function("return " + str))();
+        const json = new Function("return " + str)();
         return json;
       }
       return data;
