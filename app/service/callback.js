@@ -2,10 +2,10 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 18:05:20
+ * @Last Modified time: 2017-07-05 19:43:43
  */
 
-"use strict";
+'use strict';
 module.exports = app => {
   class Callback extends app.Service {
     /**
@@ -28,19 +28,19 @@ module.exports = app => {
      */
     async suiteTicket(data) {
       let result = await this.ctx.model.DingSysInfo.findOneAndUpdate(
-        { orgId: "SYSTEM" },
+        { orgId: 'SYSTEM' },
         { suiteTicket: data.SuiteTicket }
       );
       if (!result) {
         result = await this.ctx.model.DingSysInfo.create({
-          orgId: "SYSTEM",
-          SuiteTicket: data.SuiteTicket
+          orgId: 'SYSTEM',
+          SuiteTicket: data.SuiteTicket,
         });
       }
       if (!result) {
-        return "fail";
+        return 'fail';
       }
-      return "success";
+      return 'success';
     }
 
     /**
@@ -51,7 +51,7 @@ module.exports = app => {
      * @memberof Callback
      */
     async tmpAuthCode(data) {
-      console.log("data", data);
+      console.log('data', data);
 
       const ctx = this.ctx;
       const helper = ctx.helper;
@@ -62,14 +62,14 @@ module.exports = app => {
       const suiteToken = await helper.getSuiteToken();
 
       const urlResult = await ctx.curl(
-        config.getPermanentCodeUrl + "?suite_access_token=" + suiteToken,
+        config.getPermanentCodeUrl + '?suite_access_token=' + suiteToken,
         {
-          method: "POST",
-          contentType: "json",
+          method: 'POST',
+          contentType: 'json',
           data: {
-            tmp_auth_code: AuthCode
+            tmp_auth_code: AuthCode,
           },
-          dataType: "json"
+          dataType: 'json',
         }
       );
 
@@ -82,30 +82,30 @@ module.exports = app => {
           chPermanentCode: urlData.ch_permanent_code,
           authCorpInfo: urlData.auth_corp_info,
           corpId: urlData.auth_corp_info.corpid,
-          corpName: urlData.auth_corp_info.corp_name
-        }
+          corpName: urlData.auth_corp_info.corp_name,
+        },
       });
 
       const activateResult = await ctx.curl(
-        config.activateSuiteUrl + "?suite_access_token=" + suiteToken,
+        config.activateSuiteUrl + '?suite_access_token=' + suiteToken,
         {
-          method: "POST",
-          contentType: "json",
+          method: 'POST',
+          contentType: 'json',
           data: {
             suite_key: config.suiteKey,
             auth_corpid: orgData.ding.corpId,
-            permanent_code: orgData.ding.permanentCode
+            permanent_code: orgData.ding.permanentCode,
           },
-          dataType: "json"
+          dataType: 'json',
         }
       );
 
       this.ctx.service.orgDivision.authScopes({
         companyId: orgData._id,
-        corpId: orgData.ding.corpId
+        corpId: orgData.ding.corpId,
       });
 
-      return "success";
+      return 'success';
     }
     async changeAuth(data) {
       return data;

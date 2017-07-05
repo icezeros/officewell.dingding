@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 18:51:18
+ * @Last Modified time: 2017-07-05 19:54:33
  */
 
 'use strict';
@@ -13,13 +13,12 @@ module.exports = app => {
       const { helper } = ctx;
       // 获取企业token
       const corpToken = await helper.getCorpToken(corp.corpId);
-      console.log('==========corpToken========', corpToken);
 
       const config = this.app.config;
       // 企业部门id数组
       let departmentIds = [];
       // 用户表
-      let userIds = [];
+      // let userIds = [];
       const urlResult = await this.urlGet(config.authScopesUrl, {
         access_token: corpToken,
       });
@@ -31,7 +30,7 @@ module.exports = app => {
         this.initDepartments(corp, departmentIds[i]);
       }
 
-      userIds = userIds.concat(urlResult.data.auth_org_scopes.authed_user);
+      // userIds = userIds.concat(urlResult.data.auth_org_scopes.authed_user);
     }
 
     // 创建指定部门以及子部门的信息和用户信息
@@ -41,7 +40,7 @@ module.exports = app => {
       const corpToken = await helper.getCorpToken(corp.corpId);
       const config = this.app.config;
       // 企业部门id数组
-      let departmentIds = [ id ];
+      let departmentIds = [id];
       const departments = [];
       // 用户表
       let userIds = [];
@@ -75,7 +74,6 @@ module.exports = app => {
 
         await this.service.orgUsers.initDepartmentUsers(corp, departmentId);
       }
-
     }
 
     dataFormat(companyId, data) {
