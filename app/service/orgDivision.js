@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:14:16
+ * @Last Modified time: 2017-07-05 15:16:32
  */
 
 "use strict";
@@ -60,10 +60,10 @@ module.exports = app => {
         const departmentInfo = await this.getDingDivision(
           corpToken,
           corp.corpId,
-          departmentId,
+          departmentId
         );
         departments.push(this.dataFormat(corp.companyId, departmentInfo));
-        await this.service.orgUsers.initDepartmentUsers(corp, departmentId)
+        await this.service.orgUsers.initDepartmentUsers(corp, departmentId);
       }
       await this.ctx.model.OrgDivision.create(departments);
 
