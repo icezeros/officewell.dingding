@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:17:56
+ * @Last Modified time: 2017-07-05 15:19:48
  */
 
 'use strict';
@@ -27,6 +27,8 @@ module.exports = app => {
         corpToken,
         department_id,
       });
+      console.log(urlData.data);
+      
 
       const simpleList = urlData.data.userlist;
       for (let i = 0; i < simpleList.length; i++) {
