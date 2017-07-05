@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:49:22
+ * @Last Modified time: 2017-07-05 13:51:00
  */
 
 'use strict';
@@ -85,6 +85,8 @@ module.exports = app => {
         access_token: corpToken,
         id,
       });
+      console.log(urlResult.data);
+      
       if (urlResult.status === 200 && urlResult.errcode === 0) {
         delete urlResult.data.errcode;
         delete urlResult.data.errmsg;
