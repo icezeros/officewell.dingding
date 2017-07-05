@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 20:05:24
+ * @Last Modified time: 2017-07-06 00:06:39
  */
 'use strict';
 
@@ -61,7 +61,7 @@ module.exports = app => {
             call_back_tag: ['user_add_org'],
             token: this.app.config.ddToken,
             aes_key: this.app.config.aesKey,
-            url: 'http://47.93.50.25:7100/v1/use-add-org',
+            url: 'http://47.93.50.25:7100/v1/user-add-org',
           },
           dataType: 'json',
         }

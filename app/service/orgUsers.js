@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 23:58:14
+ * @Last Modified time: 2017-07-06 00:04:08
  */
 
 'use strict';
@@ -44,21 +44,6 @@ module.exports = app => {
           );
           continue;
         }
-        // const tmpUserUrl = await this.urlGet(config.getUser, {
-        //   access_token: corpToken,
-        //   userid: tmpUserId,
-        // });
-
-        // if (tmpUserUrl.data.errcode !== 0) {
-        //   this.logger.error(
-        //     'DingGetUserError:companyId:' +
-        //       corp.companyId +
-        //       simpleList +
-        //       tmpUserUrl.data
-        //   );
-        //   continue;
-        // }
-        // const tmpUser = this.dataFormat(corp.companyId, tmpUserUrl.data);
 
         const result = await this.ctx.model.DingUsers.findOneAndUpdate(
           { companyId: corp.companyId, userId: tmpUser.userId },

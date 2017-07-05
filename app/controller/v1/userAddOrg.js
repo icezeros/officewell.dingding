@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 21:15:08
+ * @Last Modified time: 2017-07-06 00:47:24
  */
 
 'use strict';
@@ -38,13 +38,19 @@ module.exports = app => {
           nonce: query.nonce,
           encrypt: aesMsg,
         };
-      }
-      if (obj.EventType === 'user_add_org') {
+      } else {
+        // if (obj.EventType === 'user_add_org') {
+        console.log('======================');
+        console.log('======================');
+        console.log('======================');
+        console.log('======================');
+        console.log(obj);
+
         const addResult = await this.ctx.service.userCallback.addUser(
           obj.CorpId,
-          obj.UserId
+          obj.UserId,
+          obj.EventType
         );
-        console.log('=====', addResult);
       }
       // if()
       console.log(data);
