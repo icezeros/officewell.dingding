@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-12 16:00:02
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 19:50:46
+ * @Last Modified time: 2017-07-05 15:37:13
  */
 'use strict';
 module.exports = app => {
@@ -48,7 +48,7 @@ module.exports = app => {
         required: true,
       },
       isHide: {
-        type: Object,
+        type: Boolean,
         required: true,
       },
       department: {

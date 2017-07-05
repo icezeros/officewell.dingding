@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:31:49
+ * @Last Modified time: 2017-07-05 15:37:15
  */
 
 'use strict';
@@ -43,7 +43,7 @@ module.exports = app => {
           this.logger.error('DingGetUserError:companyId:' + corp.companyId + simpleList + tmpUserUrl.data);
           continue;
         }
-        const tmpUser = this.dataFormat(corp.companyId, tmpUserUrl.data)
+        const tmpUser = this.dataFormat(corp.companyId, tmpUserUrl.data);
         const result = await this.ctx.model.DingUsers.findOneAndUpdate({
           companyId: corp.companyId,
           userId: tmpUser,
@@ -58,6 +58,9 @@ module.exports = app => {
       data.userId = data.userid;
       data.unionId = data.unionid;
       data.companyId = companyId;
+      data.orderInDepts = JSON.parse(data.orderInDepts);
+      data.isLeaderInDepts = JSON.parse(data.isLeaderInDepts);
+
       delete data.userid;
       delete data.unionid;
       delete data.companyId;
