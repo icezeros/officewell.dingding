@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:08:02
+ * @Last Modified time: 2017-07-05 13:11:11
  */
 
 'use strict';
@@ -177,6 +177,8 @@ module.exports = app => {
       let flag = true;
       let result;
       const ctx = this.ctx;
+      console.log(ctx);
+      
 
       // 网络请求出错时，重复10次
       while (flag && n < 10) {
