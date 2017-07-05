@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:37:15
+ * @Last Modified time: 2017-07-05 15:39:15
  */
 
 'use strict';
@@ -44,6 +44,8 @@ module.exports = app => {
           continue;
         }
         const tmpUser = this.dataFormat(corp.companyId, tmpUserUrl.data);
+        console.log('----------', tmpUser);
+
         const result = await this.ctx.model.DingUsers.findOneAndUpdate({
           companyId: corp.companyId,
           userId: tmpUser,
