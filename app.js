@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:14:22
+ * @Last Modified time: 2017-07-05 13:19:15
  */
 
 'use strict';
@@ -173,14 +173,14 @@ module.exports = app => {
 
   class CustomService extends app.Service {
     async urlGet(url, params) {
-      let n = 0;
-      let flag = true;
+      // let n = 0;
+      // let flag = true;
       let result;
       const ctx = this.ctx;
 
 
       // 网络请求出错时，重复10次
-      while (flag && n < 10) {
+      /*while (flag && n < 10) {
         console.log(ctx);
 
         n++;
@@ -195,7 +195,13 @@ module.exports = app => {
         if (result.status === 200) {
           flag = false;
         }
-      }
+      }*/
+      result = await ctx.curl(url, {
+        method: 'GET',
+        contentType: 'json',
+        data: params,
+        dataType: 'json',
+      });
       return result;
     }
   }
