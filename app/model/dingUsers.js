@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-12 16:00:02
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:37:13
+ * @Last Modified time: 2017-07-05 16:11:42
  */
 'use strict';
 module.exports = app => {
@@ -57,19 +57,15 @@ module.exports = app => {
       },
       position: {
         type: String,
-        required: true,
       },
       avatar: {
         type: String,
-        required: true,
       },
       jobnumber: {
         type: String,
-        required: true,
       },
       extattr: {
         type: Object,
-        required: true,
       },
 
       createdAt: {
