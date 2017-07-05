@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:22:53
+ * @Last Modified time: 2017-07-05 15:25:42
  */
 
 'use strict';
@@ -29,7 +29,6 @@ module.exports = app => {
         access_token: corpToken,
         department_id,
       });
-      console.log(urlData.data);
 
 
       const simpleList = urlData.data.userlist;
@@ -38,8 +37,10 @@ module.exports = app => {
           access_token: corpToken,
           userid: simpleList.userid,
         });
+        console.log(tmpUserUrl.data);
+
         if (tmpUserUrl.data.errcode !== 0) {
-          this.logger.error('DingGetUserError:companyId:' + corp.companyId + + simpleList + tmpUserUrl.data)
+          this.logger.error('DingGetUserError:companyId:' + corp.companyId + simpleList + tmpUserUrl.data);
           continue;
         }
         const tmpUser = this.dataFormat(corp.companyId, tmpUserUrl.data)
