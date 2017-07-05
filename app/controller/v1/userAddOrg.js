@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 20:07:05
+ * @Last Modified time: 2017-07-05 20:08:54
  */
 
 'use strict';
@@ -21,6 +21,7 @@ module.exports = app => {
       console.log(body);
 
       const msg = this.dTalkApiUtil.decrypt(body.encrypt);
+      console.log(msg);
 
       this.success('No Method');
     }
