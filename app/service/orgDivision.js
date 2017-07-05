@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 11:37:46
+ * @Last Modified time: 2017-07-05 11:39:11
  */
 
 'use strict';
@@ -14,7 +14,7 @@ module.exports = app => {
       const { helper } = ctx;
       console.log('corp.corpId', corp.corpId);
 
-      const corpToken = helper.getCorpToken(corp.corpId);
+      const corpToken = await helper.getCorpToken(corp.corpId);
       console.log('corpToken', corpToken);
 
       const config = this.app.config;
@@ -46,7 +46,7 @@ module.exports = app => {
     async initDepartments(corp, id) {
       const { ctx } = this;
       const { helper } = ctx;
-      const corpToken = helper.getCorpToken(corp.corpId);
+      const corpToken = await helper.getCorpToken(corp.corpId);
       const config = this.app.config;
       const departList = await this.urlGet(config.departmentListUrl, {
         access_token: corpToken,
@@ -75,7 +75,7 @@ module.exports = app => {
       const { ctx } = this;
       const { helper } = ctx;
       const config = this.app.config;
-      const corpToken = helper.getCorpToken(corpId);
+      const corpToken = await helper.getCorpToken(corpId);
       const urlResult = await this.urlGet(config.getDepartmentUrl, {
         access_token: corpToken,
         id
