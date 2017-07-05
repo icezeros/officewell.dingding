@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 18:27:39
+ * @Last Modified time: 2017-07-05 18:38:31
  */
 "use strict";
 const _ = require("lodash");
@@ -73,7 +73,7 @@ module.exports = {
       if (urlData.status === 200) {
         const accessToken = {
           accessToken: urlData.data.suite_access_token,
-          expire: moment().add(urlData.data.expires_in - 100, "s")
+          expire: moment().add(urlData.data.expires_in - 200, "s")
         };
         await ctx.model.DingSysInfo.update(
           { orgId: "SYSTEM" },
@@ -109,7 +109,7 @@ module.exports = {
     // 判断token是否超时
     if (
       !dingOrgInfo.ding.accessToken ||
-      moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment())
+      moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment().add(3,'s'))
     ) {
       console.log("--------token-------");
 
@@ -131,7 +131,7 @@ module.exports = {
       if (urlData.status === 200) {
         const accessToken = {
           accessToken: urlData.data.access_token,
-          expire: moment().add(urlData.data.expires_in - 100, "s")
+          expire: moment().add(urlData.data.expires_in - 200, "s")
         };
         await ctx.model.OrgCompany.update(
           { "ding.corpId": corpId },
