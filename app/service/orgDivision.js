@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 11:31:06
+ * @Last Modified time: 2017-07-05 11:35:22
  */
 
 'use strict';
@@ -21,6 +21,8 @@ module.exports = app => {
       });
       // departmentIds.push("");
       // userIds.push("");
+      console.log('departmentIds', departmentIds);
+
       departmentIds = departmentIds.concat(
         urlResult.data.auth_org_scopes.authed_dept
       );
