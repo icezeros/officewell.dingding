@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 18:26:01
+ * @Last Modified time: 2017-07-05 18:27:39
  */
 "use strict";
 const _ = require("lodash");
@@ -103,7 +103,7 @@ module.exports = {
     console.log("dingOrgInfo======", dingOrgInfo);
     console.log("--------------======", dingOrgInfo.ding);
     console.log("--------------======", dingOrgInfo.ding.accessToken);
-    console.log("--------------======", !dingOrgInfo.ding.accessToken);
+    console.log("--------------======", (!dingOrgInfo.ding.accessToken));
     console.log("--------------======", moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment()));
 
     // 判断token是否超时
