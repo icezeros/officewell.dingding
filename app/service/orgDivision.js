@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:06:19
+ * @Last Modified time: 2017-07-05 13:08:15
  */
 
 'use strict';
@@ -35,12 +35,12 @@ module.exports = app => {
 
       }
 
-      // for (let i = 0; i < departmentIds.length; i++) {
-      //   const departmentInfo = await this.getDingDivision(corp.corpId, departmentIds[i]);
-      //   console.log(departmentInfo);
+      for (let i = 0; i < departmentIds.length; i++) {
+        const departmentInfo = await this.getDingDivision(corp.corpId, departmentIds[i]);
+        console.log(departmentInfo);
         
 
-      // }
+      }
 
 
       userIds = userIds.concat(urlResult.data.auth_org_scopes.authed_user);
