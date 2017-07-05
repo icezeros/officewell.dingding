@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 14:02:26
+ * @Last Modified time: 2017-07-05 19:39:05
  */
 'use strict';
 
@@ -20,10 +20,10 @@ module.exports = app => {
       const query = this.ctx.query;
       this.ctx.body = (await this.ctx.curl(
         query.url +
-        ((await this.ctx.helper.getCorpToken(
-          'ding95c7228d2de5ea6c35c2f4657eb6378f'
-        )) +
-          query.data)
+          ((await this.ctx.helper.getCorpToken(
+            'ding95c7228d2de5ea6c35c2f4657eb6378f'
+          )) +
+            query.data)
       )).data;
     }
 
@@ -31,10 +31,10 @@ module.exports = app => {
       const query = this.ctx.query;
       const data = await this.ctx.curl(
         'https://oapi.dingtalk.com/department/get?access_token=' +
-        ((await this.ctx.helper.getCorpToken(
-          'ding95c7228d2de5ea6c35c2f4657eb6378f'
-        )) +
-          query.data),
+          ((await this.ctx.helper.getCorpToken(
+            'ding95c7228d2de5ea6c35c2f4657eb6378f'
+          )) +
+            query.data),
         {
           dataType: 'json',
         }
@@ -49,11 +49,21 @@ module.exports = app => {
     }
 
     async update() {
-      await this.ctx.model.OrgDivision.update(
-        { _id: '595b733be8e35f7584eedb05' },
-        { name: '开发部11' }
-      );
-      this.ctx.body = '=======';
+      this.ctx.body = await this.ctx.curl(
+        'https://oapi.dingtalk.com/call_back/register_call_back?access_token=' +
+          this.ctx.helper.getCorpToken('ding95c7228d2de5ea6c35c2f4657eb6378f'),
+        {
+          method: 'POST',
+          contentType: 'json',
+          data: {
+            call_back_tag: ['user_add_org'],
+            token: this.app.config.ddToken,
+            aes_key: this.app.config.aesKey,
+            url: 'http://47.93.50.25:7100/v1/use-add-org',
+          },
+          dataType: 'json',
+        }
+      ).data;
     }
   }
   return TestController;
