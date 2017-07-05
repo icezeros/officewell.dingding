@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:26:11
+ * @Last Modified time: 2017-07-05 13:27:15
  */
 
 'use strict';
@@ -25,6 +25,7 @@ module.exports = app => {
       departmentIds = departmentIds.concat(
         urlResult.data.auth_org_scopes.authed_dept
       );
+      console.log('==========', departmentIds);
 
       for (let i = 0; i < departmentIds.length; i++) {
         const tmpDepartUrl = await urlGet(config.departmentListUrl, {
@@ -35,14 +36,13 @@ module.exports = app => {
         departmentIds = departmentIds.concat(tmpDepartIds);
 
       }
-      console.log('==========', departmentIds);
 
-      for (let i = 0; i < departmentIds.length; i++) {
-        const departmentInfo = await this.getDingDivision(corp.corpId, departmentIds[i]);
-        console.log(departmentInfo);
+      // for (let i = 0; i < departmentIds.length; i++) {
+      //   const departmentInfo = await this.getDingDivision(corp.corpId, departmentIds[i]);
+      //   console.log(departmentInfo);
 
 
-      }
+      // }
 
 
       userIds = userIds.concat(urlResult.data.auth_org_scopes.authed_user);
