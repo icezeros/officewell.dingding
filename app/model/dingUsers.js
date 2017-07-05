@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-12 16:00:02
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 18:48:35
+ * @Last Modified time: 2017-07-04 19:50:46
  */
 'use strict';
 module.exports = app => {
@@ -10,6 +10,10 @@ module.exports = app => {
   const dingUsersSchema = new mongoose.Schema(
     {
       userId: {
+        type: String,
+        required: true,
+      },
+      companyId: {
         type: String,
         required: true,
       },
@@ -35,7 +39,7 @@ module.exports = app => {
         type: String,
         required: true,
       },
-      unionid: {
+      unionId: {
         type: String,
         required: true,
       },
@@ -83,11 +87,10 @@ module.exports = app => {
     { collection: 'ding_users_info' }
   );
   dingUsersSchema.pre('save', function(next) {
-    // do stuff
     this.createdAt = new Date();
     next();
   });
-  // dingUsersSchema.pre('findOneAndUpdate', function(next) {
+  // dingUsersSchema.pre('update', function(next) {
   //   // do stuff
   //   console.log('====------===');
   //   dingUsersSchema.modifiedAt = new Date();

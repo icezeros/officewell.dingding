@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 17:58:36
+ * @Last Modified time: 2017-07-04 19:02:15
  */
 'use strict';
 
@@ -55,6 +55,14 @@ module.exports = app => {
         '595b4f00888a752476fa9855',
         data.data
       );
+    }
+
+    async update() {
+      await this.ctx.model.OrgDivision.update(
+        { _id: '595b733be8e35f7584eedb05' },
+        { name: '开发部11' }
+      );
+      this.ctx.body = '=======';
     }
   }
   return HomeController;

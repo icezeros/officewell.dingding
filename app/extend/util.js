@@ -1,7 +1,6 @@
 'use strict';
 const crypto = require('crypto');
 
-
 // 提供基于PKCS7算法的加解密接口
 const PKCS7Encoder = {
   // 删除解密后明文的补位字符
@@ -115,7 +114,5 @@ DTalkCrypt.prototype.encrypt = function(text) {
   // 返回加密数据的base64编码
   return cipheredMsg.toString('base64');
 };
-
-
 
 module.exports = { DTalkCrypt };
