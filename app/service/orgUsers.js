@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:19:48
+ * @Last Modified time: 2017-07-05 15:21:22
  */
 
 'use strict';
@@ -22,6 +22,8 @@ module.exports = app => {
       const { ctx } = this;
       const { helper } = ctx;
       const config = this.app.config;
+      console.log('corp-----',corp);
+      
       const corpToken = await helper.getCorpToken(corp.corpId);
       const urlData = await this.urlGet(config.getDepartUserListUrl, {
         corpToken,
