@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 20:51:22
+ * @Last Modified time: 2017-07-05 21:24:03
  */
 
 'use strict';
@@ -75,6 +75,7 @@ module.exports = app => {
         access_token: accessToken,
         userid: userId,
       });
+      console.log(tmpUserUrl);
 
       if (tmpUserUrl.data.errcode !== 0) {
         this.logger.error(

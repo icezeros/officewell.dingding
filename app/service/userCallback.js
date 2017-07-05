@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 20:58:07
+ * @Last Modified time: 2017-07-05 23:36:14
  */
 
 'use strict';
@@ -23,15 +23,20 @@ module.exports = app => {
       const company = await this.ctx.model.OrgCompany.findOne({
         'ding.corpId': corpId,
       });
+      console.log(corpToken);
+      console.log(company);
+
       for (let i = 0; i < userIds.length; i++) {
         const tmpUser = await service.orgUsers.getUser(
           corpToken,
           company._id,
           userIds[i]
         );
+        console.log(tmpUser);
+
         if (!tmpUser) {
           this.logger.error(
-            '新增用户失败:company' + company._id + 'userId' + userIds[i]
+            '新增用户失败:company' + company._id + ' userId' + userIds[i]
           );
           continue;
         }
