@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 11:45:12
+ * @Last Modified time: 2017-07-05 11:46:15
  */
 
 'use strict';
@@ -38,8 +38,10 @@ module.exports = app => {
 
         const tmpDepartIds = tmpDepartUrl.data.department.map(item => item.id);
         console.log('tmpDepartIds', tmpDepartIds);
-        
+
         departmentIds.concat(tmpDepartIds);
+        console.log('departmentIds=======', departmentIds);
+
       }
 
       userIds = userIds.concat(urlResult.data.auth_org_scopes.authed_user);
