@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 15:25:42
+ * @Last Modified time: 2017-07-05 15:27:41
  */
 
 'use strict';
@@ -33,9 +33,10 @@ module.exports = app => {
 
       const simpleList = urlData.data.userlist;
       for (let i = 0; i < simpleList.length; i++) {
+        const tmpUserId = simpleList[i].userid;
         const tmpUserUrl = this.urlGet(config.getUser, {
           access_token: corpToken,
-          userid: simpleList.userid,
+          userid: tmpUserId,
         });
         console.log(tmpUserUrl.data);
 
