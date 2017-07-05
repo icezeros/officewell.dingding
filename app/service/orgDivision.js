@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:52:02
+ * @Last Modified time: 2017-07-05 13:55:48
  */
 
 'use strict';
@@ -37,7 +37,7 @@ module.exports = app => {
 
       for (let i = 0; i < departmentIds.length; i++) {
         const departmentInfo = await this.getDingDivision(corpToken, corp.corpId, departmentIds[i]);
-        console.log(departmentInfo);
+        console.log(this.dataFormat("ssssdf", departmentInfo));
       }
 
 
@@ -67,6 +67,8 @@ module.exports = app => {
     }
 
     dataFormat(companyId, data) {
+      delete data.errcode;
+      delete data.errmsg;
       return {
         name: data.name,
         companyId,
@@ -82,8 +84,7 @@ module.exports = app => {
         id,
       });
       if (urlResult.status === 200 && urlResult.data.errcode === 0) {
-        delete urlResult.data.errcode;
-        delete urlResult.data.errmsg;
+
         return urlResult.data;
       }
       return false;
