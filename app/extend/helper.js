@@ -2,12 +2,12 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 09:58:17
+ * @Last Modified time: 2017-07-05 18:09:24
  */
-'use strict';
-const _ = require('lodash');
-const moment = require('moment');
-const R = require('ramda');
+"use strict";
+const _ = require("lodash");
+const moment = require("moment");
+const R = require("ramda");
 // _.moment = moment;
 module.exports = {
   get _() {
@@ -49,10 +49,10 @@ module.exports = {
     const config = this.app.config;
     let suiteToken;
     const dingSysInfo = await ctx.model.DingSysInfo.findOne({
-      orgId: 'SYSTEM',
+      orgId: "SYSTEM"
     });
     if (!dingSysInfo) {
-      throw new Error('data err');
+      throw new Error("data err");
     }
 
     // 判断token是否超时
@@ -61,22 +61,22 @@ module.exports = {
       moment(dingSysInfo.accessToken.expire).isBefore(moment())
     ) {
       const urlData = await ctx.curl(config.getSuiteAccessTokenUrl, {
-        method: 'POST',
-        contentType: 'json',
+        method: "POST",
+        contentType: "json",
         data: {
           suite_key: config.suiteKey,
           suite_secret: config.suiteSecret,
-          suite_ticket: dingSysInfo.suiteTicket,
+          suite_ticket: dingSysInfo.suiteTicket
         },
-        dataType: 'json',
+        dataType: "json"
       });
       if (urlData.status === 200) {
         const accessToken = {
           accessToken: urlData.data.suite_access_token,
-          expire: moment().add(urlData.data.expires_in - 100, 's'),
+          expire: moment().add(urlData.data.expires_in - 100, "s")
         };
         await ctx.model.DingSysInfo.update(
-          { orgId: 'SYSTEM' },
+          { orgId: "SYSTEM" },
           { accessToken }
         );
         suiteToken = accessToken.accessToken;
@@ -94,43 +94,45 @@ module.exports = {
     const config = this.app.config;
     let corpToken;
     const dingOrgInfo = await ctx.model.OrgCompany.findOne({
-      'ding.corpId': corpId,
+      "ding.corpId": corpId
     });
     if (!dingOrgInfo) {
-      throw new Error('data err');
+      throw new Error("data err");
     }
 
-    console.log('dingOrgInfo======', dingOrgInfo);
+    console.log("dingOrgInfo======", dingOrgInfo);
 
     // 判断token是否超时
     if (
       !dingOrgInfo.ding.accessToken ||
       moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment())
     ) {
+      console.log("--------token-------");
+
       const suiteToken = await this.getSuiteToken();
       const urlData = await ctx.curl(
-        config.getCorpTokenUrl + '?suite_access_token=' + suiteToken,
+        config.getCorpTokenUrl + "?suite_access_token=" + suiteToken,
         {
-          method: 'POST',
-          contentType: 'json',
+          method: "POST",
+          contentType: "json",
           data: {
             auth_corpid: corpId,
-            permanent_code: dingOrgInfo.ding.permanentCode,
+            permanent_code: dingOrgInfo.ding.permanentCode
           },
-          dataType: 'json',
+          dataType: "json"
         }
       );
-      console.log('urlData.data======', urlData.data);
+      console.log("urlData.data======", urlData.data);
 
       if (urlData.status === 200) {
         const accessToken = {
           accessToken: urlData.data.access_token,
-          expire: moment().add(urlData.data.expires_in - 100, 's'),
+          expire: moment().add(urlData.data.expires_in - 100, "s")
         };
         await ctx.model.OrgCompany.update(
-          { 'ding.corpId': corpId },
+          { "ding.corpId": corpId },
           {
-            'ding.accessToken': accessToken,
+            "ding.accessToken": accessToken
           }
         );
         corpToken = accessToken.accessToken;
@@ -140,5 +142,5 @@ module.exports = {
     }
 
     return corpToken;
-  },
+  }
 };
