@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 00:45:08
+ * @Last Modified time: 2017-07-06 00:58:26
  */
 
 'use strict';
@@ -41,15 +41,20 @@ module.exports = app => {
           );
           continue;
         }
-        // switch (eventType) {
-        //   case value:
-
-        //     break;
-
-        //   default:
-        //     break;
-        // }
-        tmpUser.disabled = false;
+        delete tmpUser.createdAt;
+        switch (eventType) {
+          case 'user_add_org':
+            tmpUser.createdAt = new Date();
+            break;
+          case 'user_leave_org':
+            tmpUser.disabled = true;
+            break;
+          case 'user_modify_org':
+            tmpUser.modifiedAt = new Date();
+            break;
+          default:
+            break;
+        }
         await this.ctx.model.DingUsers.findOneAndUpdate(
           { companyId, userId: tmpUser.userId },
           tmpUser,
