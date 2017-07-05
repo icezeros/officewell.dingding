@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 09:58:03
+ * @Last Modified time: 2017-07-05 13:08:02
  */
 
 'use strict';
@@ -176,11 +176,12 @@ module.exports = app => {
       let n = 0;
       let flag = true;
       let result;
+      const ctx = this.ctx;
 
       // 网络请求出错时，重复10次
       while (flag && n < 10) {
         n++;
-        result = await this.ctx.curl(url, {
+        result = await ctx.curl(url, {
           method: 'GET',
           contentType: 'json',
           data: params,
