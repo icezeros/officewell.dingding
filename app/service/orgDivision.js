@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:38:56
+ * @Last Modified time: 2017-07-05 13:49:22
  */
 
 'use strict';
@@ -76,6 +76,10 @@ module.exports = app => {
 
     async getDingDivision(corpToken, corpId, id) {
       const config = this.app.config;
+      console.log(corpToken);
+      console.log(corpId);
+      console.log(id);
+      
       // const corpToken = await helper.getCorpToken(corpId);
       const urlResult = await this.urlGet(config.getDepartmentUrl, {
         access_token: corpToken,
