@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 17:59:57
+ * @Last Modified time: 2017-07-05 18:05:20
  */
 
 "use strict";
@@ -60,9 +60,6 @@ module.exports = app => {
       // 企业临时授权码
       const AuthCode = data.AuthCode;
       const suiteToken = await helper.getSuiteToken();
-      console.log(
-        "config.getPermanentCodeUrl?suite_access_token=" + suiteToken
-      );
 
       const urlResult = await ctx.curl(
         config.getPermanentCodeUrl + "?suite_access_token=" + suiteToken,
@@ -75,7 +72,6 @@ module.exports = app => {
           dataType: "json"
         }
       );
-      console.log("urlResult.data", urlResult.data);
 
       const urlData = urlResult.data;
       // 将企业永久授权码等企业信息保存到mongodb中
@@ -89,16 +85,7 @@ module.exports = app => {
           corpName: urlData.auth_corp_info.corp_name
         }
       });
-      console.log("orgData.data", orgData);
-      console.log("------", {
-        suite_key: config.suiteKey,
-        auth_corpid: orgData.ding.corpId,
-        permanent_code: orgData.ding.permanentCode
-      });
-      this.ctx.service.orgDivision.authScopes({
-        companyId: orgData._id,
-        corpId: orgData.ding.corpId
-      });
+
       const activateResult = await ctx.curl(
         config.activateSuiteUrl + "?suite_access_token=" + suiteToken,
         {
@@ -112,7 +99,11 @@ module.exports = app => {
           dataType: "json"
         }
       );
-      console.log("activateResult.data", activateResult.data);
+
+      this.ctx.service.orgDivision.authScopes({
+        companyId: orgData._id,
+        corpId: orgData.ding.corpId
+      });
 
       return "success";
     }
