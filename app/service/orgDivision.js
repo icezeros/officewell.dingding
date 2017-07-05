@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 14:27:59
+ * @Last Modified time: 2017-07-05 15:14:16
  */
 
 "use strict";
@@ -34,6 +34,7 @@ module.exports = app => {
       console.log('userIds=======', userIds);
     }
 
+    // 创建指定部门以及子部门的信息和用户信息
     async initDepartments(corp, id) {
       const { ctx } = this;
       const { helper } = ctx;
@@ -55,19 +56,18 @@ module.exports = app => {
       // }
 
       for (let i = 0; i < departmentIds.length; i++) {
+        const departmentId = departmentIds[i];
         const departmentInfo = await this.getDingDivision(
           corpToken,
           corp.corpId,
-          departmentIds[i]
+          departmentId,
         );
-        departments.push(this.dataFormat(corp.companyId, departmentInfo))
-        // console.log(this.dataFormat(corp.companyId, departmentInfo));
+        departments.push(this.dataFormat(corp.companyId, departmentInfo));
+        await this.service.orgUsers.initDepartmentUsers(corp, departmentId)
       }
       await this.ctx.model.OrgDivision.create(departments);
 
-      // userIds = userIds.concat(urlResult.data.auth_org_scopes.authed_user);
       console.log('departmentIds=======', departmentIds);
-      // console.log("userIds=======", userIds);
     }
 
     dataFormat(companyId, data) {
@@ -80,9 +80,9 @@ module.exports = app => {
       };
     }
 
+    //从钉钉获取部门信息
     async getDingDivision(corpToken, corpId, id) {
       const config = this.app.config;
-      // const corpToken = await helper.getCorpToken(corpId);
       const urlResult = await this.urlGet(config.getDepartmentUrl, {
         access_token: corpToken,
         id,
