@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 19:39:05
+ * @Last Modified time: 2017-07-05 20:02:46
  */
 'use strict';
 
@@ -49,7 +49,7 @@ module.exports = app => {
     }
 
     async update() {
-      this.ctx.body = await this.ctx.curl(
+      const result = await this.ctx.curl(
         'https://oapi.dingtalk.com/call_back/register_call_back?access_token=' +
           this.ctx.helper.getCorpToken('ding95c7228d2de5ea6c35c2f4657eb6378f'),
         {
@@ -63,7 +63,9 @@ module.exports = app => {
           },
           dataType: 'json',
         }
-      ).data;
+      );
+      console.log(result);
+      this.ctx.body = result.data;
     }
   }
   return TestController;
