@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:35:49
+ * @Last Modified time: 2017-07-05 13:38:11
  */
 
 'use strict';
@@ -25,8 +25,6 @@ module.exports = app => {
       departmentIds = departmentIds.concat(
         urlResult.data.auth_org_scopes.authed_dept
       );
-      console.log('==========', departmentIds);
-
       for (let i = 0; i < departmentIds.length; i++) {
         const tmpDepartUrl = await this.urlGet(config.departmentListUrl, {
           access_token: corpToken,
@@ -39,7 +37,7 @@ module.exports = app => {
 
       for (let i = 0; i < departmentIds.length; i++) {
         const departmentInfo = await this.getDingDivision(corpToken, corp.corpId, departmentIds[i]);
-        console.log(departmentInfo);
+        console.log(departmentInfo.data);
       }
 
 

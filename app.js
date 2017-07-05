@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:33:10
+ * @Last Modified time: 2017-07-05 13:38:09
  */
 
 'use strict';
@@ -102,9 +102,6 @@ module.exports = app => {
 
       const aa = new Buffer(4);
       // aa.writeInt32BE(97);
-      console.log('data', data);
-      console.log('data.length', data.length);
-
       aa.writeInt32BE(data.length);
 
       buf += aa;
@@ -181,8 +178,6 @@ module.exports = app => {
 
       // 网络请求出错时，重复10次
       while (flag && n < 10) {
-        console.log(ctx);
-
         n++;
         result = await ctx.curl(url, {
           method: 'GET',
