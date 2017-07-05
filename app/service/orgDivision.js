@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 11:39:11
+ * @Last Modified time: 2017-07-05 11:43:27
  */
 
 'use strict';
@@ -25,7 +25,6 @@ module.exports = app => {
       });
       // departmentIds.push("");
       // userIds.push("");
-      console.log('urlResult', urlResult);
 
       departmentIds = departmentIds.concat(
         urlResult.data.auth_org_scopes.authed_dept
@@ -33,7 +32,10 @@ module.exports = app => {
       for (let i = 0; i < departmentIds.length; i++) {
         const tmpDepartUrl = await this.urlGet(config.departmentListUrl, {
           access_token: corpToken,
+          id: departmentIds[i],
         });
+        console.log('tmpDepartUrl.data', tmpDepartUrl.data);
+
         const tmpDepartIds = tmpDepartUrl.data.department.map(item => item.id);
         departmentIds.concat(tmpDepartIds);
       }
