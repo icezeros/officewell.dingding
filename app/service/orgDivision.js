@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:32:06
+ * @Last Modified time: 2017-07-05 13:35:49
  */
 
 'use strict';
@@ -38,10 +38,8 @@ module.exports = app => {
       }
 
       for (let i = 0; i < departmentIds.length; i++) {
-        const departmentInfo = await this.getDingDivision(corp.corpId, departmentIds[i]);
+        const departmentInfo = await this.getDingDivision(corpToken, corp.corpId, departmentIds[i]);
         console.log(departmentInfo);
-
-
       }
 
 
@@ -78,12 +76,9 @@ module.exports = app => {
       };
     }
 
-    async getDingDivision(corpId, id) {
-
-      const { ctx } = this;
-      const { helper } = ctx;
+    async getDingDivision(corpToken, corpId, id) {
       const config = this.app.config;
-      const corpToken = await helper.getCorpToken(corpId);
+      // const corpToken = await helper.getCorpToken(corpId);
       const urlResult = await this.urlGet(config.getDepartmentUrl, {
         access_token: corpToken,
         id,
