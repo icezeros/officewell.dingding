@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:19:15
+ * @Last Modified time: 2017-07-05 13:21:59
  */
 
 'use strict';
@@ -202,6 +202,8 @@ module.exports = app => {
         data: params,
         dataType: 'json',
       });
+      console.log(result);
+
       return result;
     }
   }
