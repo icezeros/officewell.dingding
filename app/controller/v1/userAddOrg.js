@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 21:07:46
+ * @Last Modified time: 2017-07-05 21:09:30
  */
 
 'use strict';
@@ -40,7 +40,7 @@ module.exports = app => {
         };
       }
       if (obj.EventType === 'user_add_org') {
-        const addResult = this.ctx.service.orgUsers.addUser(
+        const addResult = await this.ctx.service.orgUsers.addUser(
           obj.CorpId,
           obj.UserId
         );
