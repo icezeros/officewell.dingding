@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:27:15
+ * @Last Modified time: 2017-07-05 13:29:08
  */
 
 'use strict';
@@ -27,15 +27,15 @@ module.exports = app => {
       );
       console.log('==========', departmentIds);
 
-      for (let i = 0; i < departmentIds.length; i++) {
-        const tmpDepartUrl = await urlGet(config.departmentListUrl, {
-          access_token: corpToken,
-          id: departmentIds[i],
-        });
-        const tmpDepartIds = tmpDepartUrl.data.department.map(item => item.id);
-        departmentIds = departmentIds.concat(tmpDepartIds);
+      // for (let i = 0; i < departmentIds.length; i++) {
+      //   const tmpDepartUrl = await urlGet(config.departmentListUrl, {
+      //     access_token: corpToken,
+      //     id: departmentIds[i],
+      //   });
+      //   const tmpDepartIds = tmpDepartUrl.data.department.map(item => item.id);
+      //   departmentIds = departmentIds.concat(tmpDepartIds);
 
-      }
+      // }
 
       // for (let i = 0; i < departmentIds.length; i++) {
       //   const departmentInfo = await this.getDingDivision(corp.corpId, departmentIds[i]);
