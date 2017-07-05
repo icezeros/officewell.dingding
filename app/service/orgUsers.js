@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 21:24:03
+ * @Last Modified time: 2017-07-05 23:54:19
  */
 
 'use strict';
@@ -75,7 +75,6 @@ module.exports = app => {
         access_token: accessToken,
         userid: userId,
       });
-      console.log(tmpUserUrl);
 
       if (tmpUserUrl.data.errcode !== 0) {
         this.logger.error(
@@ -83,6 +82,9 @@ module.exports = app => {
         );
         return false;
       }
+      console.log('companyId', companyId);
+      console.log('tmpUserUrl.data', tmpUserUrl.data);
+
       return this.dataFormat(companyId, tmpUserUrl.data);
     }
 
