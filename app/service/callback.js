@@ -2,10 +2,10 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 16:14:51
+ * @Last Modified time: 2017-07-05 17:59:57
  */
 
-'use strict';
+"use strict";
 module.exports = app => {
   class Callback extends app.Service {
     /**
@@ -28,19 +28,19 @@ module.exports = app => {
      */
     async suiteTicket(data) {
       let result = await this.ctx.model.DingSysInfo.findOneAndUpdate(
-        { orgId: 'SYSTEM' },
+        { orgId: "SYSTEM" },
         { suiteTicket: data.SuiteTicket }
       );
       if (!result) {
         result = await this.ctx.model.DingSysInfo.create({
-          orgId: 'SYSTEM',
-          SuiteTicket: data.SuiteTicket,
+          orgId: "SYSTEM",
+          SuiteTicket: data.SuiteTicket
         });
       }
       if (!result) {
-        return 'fail';
+        return "fail";
       }
-      return 'success';
+      return "success";
     }
 
     /**
@@ -51,7 +51,7 @@ module.exports = app => {
      * @memberof Callback
      */
     async tmpAuthCode(data) {
-      console.log('data', data);
+      console.log("data", data);
 
       const ctx = this.ctx;
       const helper = ctx.helper;
@@ -61,21 +61,21 @@ module.exports = app => {
       const AuthCode = data.AuthCode;
       const suiteToken = await helper.getSuiteToken();
       console.log(
-        'config.getPermanentCodeUrl?suite_access_token=' + suiteToken
+        "config.getPermanentCodeUrl?suite_access_token=" + suiteToken
       );
 
       const urlResult = await ctx.curl(
-        config.getPermanentCodeUrl + '?suite_access_token=' + suiteToken,
+        config.getPermanentCodeUrl + "?suite_access_token=" + suiteToken,
         {
-          method: 'POST',
-          contentType: 'json',
+          method: "POST",
+          contentType: "json",
           data: {
-            tmp_auth_code: AuthCode,
+            tmp_auth_code: AuthCode
           },
-          dataType: 'json',
+          dataType: "json"
         }
       );
-      console.log('urlResult.data', urlResult.data);
+      console.log("urlResult.data", urlResult.data);
 
       const urlData = urlResult.data;
       // 将企业永久授权码等企业信息保存到mongodb中
@@ -86,32 +86,35 @@ module.exports = app => {
           chPermanentCode: urlData.ch_permanent_code,
           authCorpInfo: urlData.auth_corp_info,
           corpId: urlData.auth_corp_info.corpid,
-          corpName: urlData.auth_corp_info.corp_name,
-        },
+          corpName: urlData.auth_corp_info.corp_name
+        }
       });
-      console.log('orgData.data', orgData);
-      console.log('------', {
+      console.log("orgData.data", orgData);
+      console.log("------", {
         suite_key: config.suiteKey,
         auth_corpid: orgData.ding.corpId,
-        permanent_code: orgData.ding.permanentCode,
+        permanent_code: orgData.ding.permanentCode
       });
-
+      this.ctx.service.orgDivision.authScopes({
+        companyId: orgData._id,
+        corpId: orgData.ding.corpId
+      });
       const activateResult = await ctx.curl(
-        config.activateSuiteUrl + '?suite_access_token=' + suiteToken,
+        config.activateSuiteUrl + "?suite_access_token=" + suiteToken,
         {
-          method: 'POST',
-          contentType: 'json',
+          method: "POST",
+          contentType: "json",
           data: {
             suite_key: config.suiteKey,
             auth_corpid: orgData.ding.corpId,
-            permanent_code: orgData.ding.permanentCode,
+            permanent_code: orgData.ding.permanentCode
           },
-          dataType: 'json',
+          dataType: "json"
         }
       );
-      console.log('activateResult.data', activateResult.data);
+      console.log("activateResult.data", activateResult.data);
 
-      return 'success';
+      return "success";
     }
     async changeAuth(data) {
       return data;

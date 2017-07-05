@@ -2,10 +2,10 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 17:54:01
+ * @Last Modified time: 2017-07-05 17:56:46
  */
 
-"use strict";
+'use strict';
 module.exports = app => {
   class OrgDivision extends app.Service {
     async authScopes(corp) {
