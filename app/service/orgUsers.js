@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 01:15:19
+ * @Last Modified time: 2017-07-06 11:47:55
  */
 
 'use strict';
@@ -49,7 +49,10 @@ module.exports = app => {
         const result = await this.ctx.model.DingUsers.findOneAndUpdate(
           { companyId: corp.companyId, userId: tmpUser.userId },
           tmpUser,
-          { upsert: true }
+          {
+            new: true,
+            upsert: true,
+          }
         );
         console.log(result);
       }

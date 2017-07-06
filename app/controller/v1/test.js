@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 01:23:50
+ * @Last Modified time: 2017-07-06 12:02:59
  */
 'use strict';
 
@@ -49,41 +49,23 @@ module.exports = app => {
     }
 
     async update() {
+      const body = this.ctx.request.body;
       const result = await this.ctx.curl(
         'https://oapi.dingtalk.com/call_back/register_call_back?access_token=' +
-          (await this.ctx.helper.getCorpToken(
-            'ding95c7228d2de5ea6c35c2f4657eb6378f'
-          )),
+          (await this.ctx.helper.getCorpToken(body.corpId)),
         {
           method: 'POST',
           contentType: 'json',
           data: {
-            call_back_tag: ['user_add_org', 'user_modify_org'],
+            call_back_tag: body.call_back_tag,
             token: this.app.config.ddToken,
             aes_key: this.app.config.aesKey,
-            url: 'http://47.93.50.25:7100/v1/user-add-org',
+            url: body.url,
           },
           dataType: 'json',
         }
       );
 
-      await this.ctx.curl(
-        'https://oapi.dingtalk.com/call_back/register_call_back?access_token=' +
-          (await this.ctx.helper.getCorpToken(
-            'ding95c7228d2de5ea6c35c2f4657eb6378f'
-          )),
-        {
-          method: 'POST',
-          contentType: 'json',
-          data: {
-            call_back_tag: ['user_leave_org'],
-            token: this.app.config.ddToken,
-            aes_key: this.app.config.aesKey,
-            url: 'http://47.93.50.25:7100/v1/user-leave-org',
-          },
-          dataType: 'json',
-        }
-      );
       console.log(result);
       this.ctx.body = result.data;
     }

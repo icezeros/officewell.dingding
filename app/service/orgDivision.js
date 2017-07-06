@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 19:54:33
+ * @Last Modified time: 2017-07-06 11:47:40
  */
 
 'use strict';
@@ -69,7 +69,10 @@ module.exports = app => {
             'ding.id': department.ding.id,
           },
           department,
-          { upsert: true }
+          {
+            new: true,
+            upsert: true,
+          }
         );
 
         await this.service.orgUsers.initDepartmentUsers(corp, departmentId);
