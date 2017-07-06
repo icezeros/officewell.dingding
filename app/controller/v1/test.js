@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 12:07:41
+ * @Last Modified time: 2017-07-06 12:12:56
  */
 'use strict';
 
@@ -53,7 +53,7 @@ module.exports = app => {
       const result = await this.ctx.curl(
         body.url2 + (await this.ctx.helper.getCorpToken(body.corpId)),
         {
-          method: 'POST',
+          method: body.method || 'POST',
           contentType: 'json',
           data: {
             call_back_tag: body.call_back_tag,
