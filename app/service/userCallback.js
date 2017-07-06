@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 17:16:34
+ * @Last Modified time: 2017-07-06 17:54:56
  */
 
 'use strict';
@@ -68,7 +68,7 @@ module.exports = app => {
       return true;
     }
 
-    async removeUser(corpId, userIds, eventType) {
+    async removeUser(corpId, userIds) {
       const helper = this.ctx.helper;
       const config = this.app.config;
       const service = this.service;

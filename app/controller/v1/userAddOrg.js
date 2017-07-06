@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 17:12:39
+ * @Last Modified time: 2017-07-06 17:57:42
  */
 
 'use strict';
@@ -26,8 +26,47 @@ module.exports = app => {
       console.log(obj);
       // const aesMsg = this.dTalkApiUtil.encrypt('success');
 
-      let result = 'success';
-      if (obj.EventType === 'user_add_org') {
+      let result;
+      switch (obj.EventType) {
+        case 'check_url':
+          result = true;
+          break;
+        case 'user_modify_org':
+        case 'org_admin_remove':
+        case 'org_admin_add':
+        case 'user_add_org':
+          result = await this.ctx.service.userCallback.addUser(
+            obj.CorpId,
+            obj.UserId,
+            obj.EventType
+          );
+          break;
+        case 'user_leave_org':
+          result = await this.ctx.service.userCallback.removeUser(
+            obj.CorpId,
+            obj.UserId
+          );
+          break;
+        case 'org_dept_create':
+          result = true;
+          break;
+        case 'org_dept_modify':
+          result = true;
+          break;
+        case 'org_dept_remove':
+          result = true;
+          break;
+        case 'org_remove':
+          result = true;
+          break;
+        case 'org_change':
+          result = true;
+          break;
+        default:
+          result = true;
+          break;
+      }
+      /*if (obj.EventType === 'user_add_org') {
         // if (obj.EventType === 'user_add_org') {
         console.log('======================');
         console.log('======================');
@@ -43,10 +82,14 @@ module.exports = app => {
         if (!addResult) {
           result = 'fail';
         }
-      }
+      }*/
       // if()
       console.log(data);
-      this.dingBody(result);
+      if (result) {
+        this.dingBody('success');
+      } else {
+        this.dingBody('fail');
+      }
 
       // this.ctx.body = result;
       // this.success('No Method');
