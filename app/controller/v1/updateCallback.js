@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 20:07:52
+ * @Last Modified time: 2017-07-06 20:17:20
  */
 
 'use strict';
@@ -60,6 +60,13 @@ module.exports = app => {
             obj.CorpId,
             obj.UserId
           );
+          console.log(result);
+          console.log('========');
+          console.log('========');
+          console.log('========');
+          console.log('========');
+          console.log('========');
+
           break;
         case 'org_remove':
           result = true;
