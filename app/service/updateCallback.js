@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 20:14:57
+ * @Last Modified time: 2017-07-06 20:24:09
  */
 
 'use strict';
@@ -159,7 +159,7 @@ module.exports = app => {
       console.log(corpToken);
       console.log(company);
       console.log('11111121111111111111111');
-      const tmp = await this.ctx.model.OrgDivision.remove({
+      const tmp = await this.ctx.model.OrgDivision.find({
         companyId,
         'ding.id': DeptIds,
       });
