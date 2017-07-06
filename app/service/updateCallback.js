@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 20:24:09
+ * @Last Modified time: 2017-07-06 20:25:15
  */
 
 'use strict';
@@ -163,7 +163,10 @@ module.exports = app => {
         companyId,
         'ding.id': DeptIds,
       });
-      console.log(tmp);
+      console.log({
+        companyId,
+        'ding.id': DeptIds,
+      });
       if (tmp.result.ok !== 1) {
         return false;
       }
