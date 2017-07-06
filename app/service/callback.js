@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 14:24:46
+ * @Last Modified time: 2017-07-06 18:11:54
  */
 
 'use strict';
@@ -122,6 +122,7 @@ module.exports = app => {
     }
     async suiteRelieve(data) {
       console.log('1111111111111111');
+      console.log(data);
 
       await this.ctx.model.OrgCompany.update(
         { 'ding.corpId': data.CorpId },

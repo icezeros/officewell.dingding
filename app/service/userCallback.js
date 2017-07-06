@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 18:01:41
+ * @Last Modified time: 2017-07-06 18:07:27
  */
 
 'use strict';
@@ -37,22 +37,21 @@ module.exports = app => {
 
         if (!tmpUser) {
           this.logger.error(
-            '新增用户失败:company' + companyId + ' userId' + userIds[i]
+            eventType + ' 用户失败:companyId ' + companyId + ' userId' + userIds[i]
           );
           continue;
         }
         delete tmpUser.createdAt;
+        tmpUser.disabled = false;
         switch (eventType) {
           case 'user_add_org':
             tmpUser.createdAt = new Date();
-            break;
-          case 'user_leave_org':
-            tmpUser.disabled = true;
             break;
           case 'user_modify_org':
             tmpUser.modifiedAt = new Date();
             break;
           default:
+            tmpUser.modifiedAt = new Date();
             break;
         }
         await this.ctx.model.DingUsers.findOneAndUpdate(
