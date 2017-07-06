@@ -34,7 +34,7 @@ module.exports = app => {
         console.log('======================');
         console.log(obj);
 
-        const addResult = await this.ctx.service.userCallback.removeUser(
+        const addResult = await this.ctx.service.updateCallback.removeUser(
           obj.CorpId,
           obj.UserId,
           obj.EventType

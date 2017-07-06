@@ -2,18 +2,18 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 18:07:27
+ * @Last Modified time: 2017-07-06 19:16:29
  */
 
 'use strict';
 module.exports = app => {
-  class UserCallback extends app.Service {
+  class UpdateCallback extends app.Service {
     /**
      * 用户增加事件
      *
      * @param {boj} data            钉钉POST解密后的数据
      * @return {boj} data.Random    需要加密的返回数据
-     * @memberof UserCallback
+     * @memberof UpdateCallback
      */
     async addUser(corpId, userIds, eventType) {
       const helper = this.ctx.helper;
@@ -93,5 +93,5 @@ module.exports = app => {
       return true;
     }
   }
-  return UserCallback;
+  return UpdateCallback;
 };

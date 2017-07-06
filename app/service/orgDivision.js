@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 19:02:56
+ * @Last Modified time: 2017-07-06 19:06:21
  */
 
 'use strict';
@@ -71,6 +71,8 @@ module.exports = app => {
         console.log(department);
 
         // departments.push(this.dataFormat(corp.companyId, departmentInfo));
+        department.createdAt = new Date();
+
         await this.ctx.model.OrgDivision.findOneAndUpdate(
           {
             companyId: corp.companyId,
@@ -92,9 +94,9 @@ module.exports = app => {
       delete data.errmsg;
       return {
         name: data.name,
-        createdAt: new Date(),
         companyId,
         ding: data,
+        disabled: false,
       };
     }
 

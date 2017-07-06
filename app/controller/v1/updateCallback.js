@@ -2,13 +2,13 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 17:57:42
+ * @Last Modified time: 2017-07-06 19:14:12
  */
 
 'use strict';
 
 module.exports = app => {
-  class UserAddOrgController extends app.Controller {
+  class UpdateCallbackController extends app.Controller {
     async index() {
       this.fail('No Method', 405);
     }
@@ -35,14 +35,14 @@ module.exports = app => {
         case 'org_admin_remove':
         case 'org_admin_add':
         case 'user_add_org':
-          result = await this.ctx.service.userCallback.addUser(
+          result = await this.ctx.service.updateCallback.addUser(
             obj.CorpId,
             obj.UserId,
             obj.EventType
           );
           break;
         case 'user_leave_org':
-          result = await this.ctx.service.userCallback.removeUser(
+          result = await this.ctx.service.updateCallback.removeUser(
             obj.CorpId,
             obj.UserId
           );
@@ -74,7 +74,7 @@ module.exports = app => {
         console.log('======================');
         console.log(obj);
 
-        const addResult = await this.ctx.service.userCallback.addUser(
+        const addResult = await this.ctx.service.updateCallback.addUser(
           obj.CorpId,
           obj.UserId,
           obj.EventType
@@ -103,5 +103,5 @@ module.exports = app => {
       this.fail('No Method', 405);
     }
   }
-  return UserAddOrgController;
+  return UpdateCallbackController;
 };

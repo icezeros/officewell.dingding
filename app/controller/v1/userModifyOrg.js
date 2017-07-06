@@ -35,7 +35,7 @@ module.exports = app => {
         console.log('======================');
         console.log(obj);
 
-        const addResult = await this.ctx.service.userCallback.addUser(
+        const addResult = await this.ctx.service.updateCallback.addUser(
           obj.CorpId,
           obj.UserId,
           obj.EventType
