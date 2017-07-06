@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 19:16:29
+ * @Last Modified time: 2017-07-06 19:38:46
  */
 
 'use strict';
@@ -90,6 +90,58 @@ module.exports = app => {
       );
       console.log(tmp);
 
+      return true;
+    }
+
+    async addOrUpDepartment(corpId, DeptIds, eventType) {
+      const helper = this.ctx.helper;
+      const config = this.app.config;
+      const service = this.service;
+      const corpToken = await helper.getCorpToken(corpId);
+      const company = await this.ctx.model.OrgCompany.findOne({
+        'ding.corpId': corpId,
+      });
+      const companyId = company._id;
+      console.log(corpToken);
+      console.log(company);
+
+      for (let i = 0; i < DeptIds.length; i++) {
+        const tmpDivision = await service.orgDivision.getDingDivision(
+          corpToken,
+          companyId,
+          DeptIds[i]
+        );
+        console.log(tmpDivision);
+
+        if (!tmpDivision) {
+          this.logger.error(
+            eventType + ' 部门失败:companyId ' + companyId + ' userId' + userIds[i]
+          );
+          continue;
+        }
+        delete tmpDivision.createdAt;
+        tmpDivision.disabled = false;
+        switch (eventType) {
+          case 'user_add_org':
+            tmpDivision.createdAt = new Date();
+            break;
+          case 'user_modify_org':
+            tmpDivision.modifiedAt = new Date();
+            break;
+          default:
+            tmpDivision.modifiedAt = new Date();
+            break;
+        }
+        await this.ctx.model.DingUsers.findOneAndUpdate(
+          { companyId, userId: tmpDivision.userId },
+          tmpDivision,
+          {
+            new: true,
+            upsert: true,
+          }
+        );
+        // await this.ctx.model.DingUsers.create(tmpUser);
+      }
       return true;
     }
   }
