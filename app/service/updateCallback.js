@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 20:08:34
+ * @Last Modified time: 2017-07-06 20:14:57
  */
 
 'use strict';
@@ -89,7 +89,9 @@ module.exports = app => {
         }
       );
       console.log(tmp);
-
+      if (tmp.result.ok !== 1) {
+        return false;
+      }
       return true;
     }
 
@@ -162,7 +164,9 @@ module.exports = app => {
         'ding.id': DeptIds,
       });
       console.log(tmp);
-
+      if (tmp.result.ok !== 1) {
+        return false;
+      }
       return true;
     }
   }
