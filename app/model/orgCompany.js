@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 15:24:48
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 15:54:46
+ * @Last Modified time: 2017-07-06 11:34:48
  */
 
 'use strict';
@@ -57,18 +57,20 @@ module.exports = app => {
     },
     { collection: 'org_company' }
   );
-  // orgCompanySchema.pre('save', function(next) {
-  //   // do stuff
-  //   this.createdAt = new Date();
-  //   next();
-  // });
-  // orgCompanySchema.pre('findOneAndUpdate', function(next) {
-  //   // do stuff
-  //   console.log('====------===');
-  //   orgCompanySchema.modifiedAt = new Date();
-  //   console.log(this.orgId);
-  //   next();
-  // });
+  orgCompanySchema.pre('save', function(next) {
+    // do stuff
+    this.createdAt = new Date();
+    next();
+  });
+  orgCompanySchema.pre('update', function(next) {
+    // do stuff
+    console.log('*********', this);
+    this.update({}, { $set: { modifiedAt: new Date() } });
+    // console.log('====------===');
+    // orgCompanySchema.modifiedAt = new Date();
+    // console.log(this.orgId);
+    next();
+  });
 
   return mongoose.model('OrgCompany', orgCompanySchema);
 };
