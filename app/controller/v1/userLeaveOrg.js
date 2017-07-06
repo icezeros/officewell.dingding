@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 01:29:37
+ * @Last Modified time: 2017-07-06 17:15:13
  */
 
 'use strict';
@@ -18,27 +18,15 @@ module.exports = app => {
 
     async create() {
       const body = this.ctx.request.body;
-      const query = this.ctx.query;
+      // const query = this.ctx.query;
       console.log(body);
       console.log(this.ctx.query);
       const data = this.dTalkApiUtil.decrypt(body.encrypt);
       const obj = JSON.parse(data.message);
       console.log(obj);
-      const aesMsg = this.dTalkApiUtil.encrypt('success');
 
-      let result;
-      if (obj.EventType === 'check_url') {
-        result = {
-          msg_signature: this.dTalkApiUtil.getSignature(
-            query.timestamp,
-            query.nonce,
-            aesMsg
-          ),
-          timeStamp: query.timestamp,
-          nonce: query.nonce,
-          encrypt: aesMsg,
-        };
-      } else {
+      let result = 'success';
+      if (obj.EventType === 'user_leave_org') {
         // if (obj.EventType === 'user_add_org') {
         console.log('======================');
         console.log('======================');
@@ -51,10 +39,15 @@ module.exports = app => {
           obj.UserId,
           obj.EventType
         );
+        if (!addResult) {
+          result = 'fail';
+        }
       }
       // if()
       console.log(data);
-      this.ctx.body = result;
+      // this.ctx.body = result;
+      this.dingBody(result);
+
       // this.success('No Method');
     }
 

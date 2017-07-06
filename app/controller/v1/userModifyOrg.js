@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 17:05:46
+ * @Last Modified time: 2017-07-06 17:12:44
  */
 
 'use strict';
@@ -18,7 +18,7 @@ module.exports = app => {
 
     async create() {
       const body = this.ctx.request.body;
-      const query = this.ctx.query;
+      // const query = this.ctx.query;
       console.log(body);
       console.log(this.ctx.query);
       const data = this.dTalkApiUtil.decrypt(body.encrypt);
@@ -44,10 +44,11 @@ module.exports = app => {
           result = 'fail';
         }
       }
-      this.dingBody(result);
 
       // if()
       console.log(data);
+      this.dingBody(result);
+
       // this.ctx.body = result;
       // this.success('No Method');
     }
