@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 20:17:20
+ * @Last Modified time: 2017-07-06 20:26:52
  */
 
 'use strict';
@@ -58,7 +58,7 @@ module.exports = app => {
         case 'org_dept_remove':
           result = await this.ctx.service.updateCallback.removeDivision(
             obj.CorpId,
-            obj.UserId
+            obj.DeptId
           );
           console.log(result);
           console.log('========');
