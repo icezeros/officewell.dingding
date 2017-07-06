@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 15:24:48
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 11:34:48
+ * @Last Modified time: 2017-07-06 13:37:51
  */
 
 'use strict';
@@ -64,7 +64,6 @@ module.exports = app => {
   });
   orgCompanySchema.pre('update', function(next) {
     // do stuff
-    console.log('*********', this);
     this.update({}, { $set: { modifiedAt: new Date() } });
     // console.log('====------===');
     // orgCompanySchema.modifiedAt = new Date();
