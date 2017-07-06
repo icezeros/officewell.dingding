@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 11:26:44
+ * @Last Modified time: 2017-07-06 11:42:30
  */
 
 'use strict';
@@ -88,6 +88,7 @@ module.exports = app => {
           },
         },
         {
+          new: true,
           upsert: true,
         }
       );
