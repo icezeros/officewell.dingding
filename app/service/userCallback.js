@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 01:21:42
+ * @Last Modified time: 2017-07-06 09:18:31
  */
 
 'use strict';
@@ -86,41 +86,6 @@ module.exports = app => {
         }
       );
 
-      for (let i = 0; i < userIds.length; i++) {
-        const tmpUser = await service.orgUsers.getUser(
-          corpToken,
-          companyId,
-          userIds[i]
-        );
-        console.log(tmpUser);
-
-        if (!tmpUser) {
-          this.logger.error(
-            '新增用户失败:company' + companyId + ' userId' + userIds[i]
-          );
-          continue;
-        }
-        delete tmpUser.createdAt;
-        switch (eventType) {
-          case 'user_add_org':
-            tmpUser.createdAt = new Date();
-            break;
-          case 'user_leave_org':
-            tmpUser.disabled = true;
-            break;
-          case 'user_modify_org':
-            tmpUser.modifiedAt = new Date();
-            break;
-          default:
-            break;
-        }
-        await this.ctx.model.DingUsers.findOneAndUpdate(
-          { companyId, userId: tmpUser.userId },
-          tmpUser,
-          { upsert: true }
-        );
-        // await this.ctx.model.DingUsers.create(tmpUser);
-      }
       return true;
     }
   }
