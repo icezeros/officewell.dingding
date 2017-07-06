@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 17:54:56
+ * @Last Modified time: 2017-07-06 18:01:41
  */
 
 'use strict';
@@ -80,7 +80,7 @@ module.exports = app => {
       console.log(corpToken);
       console.log(company);
       console.log('11111121111111111111111');
-      const tmp = await this.tcx.model.DingUsers.updateMany(
+      const tmp = await this.ctx.model.DingUsers.updateMany(
         {
           companyId,
           userId: userIds,
