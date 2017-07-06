@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 12:02:59
+ * @Last Modified time: 2017-07-06 12:07:41
  */
 'use strict';
 
@@ -51,8 +51,7 @@ module.exports = app => {
     async update() {
       const body = this.ctx.request.body;
       const result = await this.ctx.curl(
-        'https://oapi.dingtalk.com/call_back/register_call_back?access_token=' +
-          (await this.ctx.helper.getCorpToken(body.corpId)),
+        body.url2 + (await this.ctx.helper.getCorpToken(body.corpId)),
         {
           method: 'POST',
           contentType: 'json',
