@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 13:38:09
+ * @Last Modified time: 2017-07-06 17:05:14
  */
 
 'use strict';
@@ -11,7 +11,7 @@ const crypto = require('crypto');
 const dTalkApiUtil = require('./app/extend/util').DTalkCrypt;
 
 module.exports = app => {
-  app.beforeStart(function* () {
+  app.beforeStart(function*() {
     // 应用会等待这个函数执行完成才启动
     app.logger.info(app.config.env);
   });
@@ -49,6 +49,18 @@ module.exports = app => {
       this.ctx.body = {
         status: 'success',
         data,
+      };
+    }
+
+    dingBody(data) {
+      const aesMsg = this.dTalkApiUtil.encrypt(data);
+      const timestamp = this.ctx.helper.moment().unix();
+      const nonce = '345dfg';
+      this.ctx.body = {
+        msg_signature: this.dTalkApiUtil.getSignature(timestamp, nonce, aesMsg),
+        timeStamp: timestamp,
+        nonce,
+        encrypt: aesMsg,
       };
     }
 
@@ -174,7 +186,6 @@ module.exports = app => {
       let flag = true;
       let result;
       const ctx = this.ctx;
-
 
       // 网络请求出错时，重复10次
       while (flag && n < 10) {

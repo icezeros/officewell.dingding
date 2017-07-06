@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 18:49:10
+ * @Last Modified time: 2017-07-06 17:06:37
  */
 'use strict';
 
@@ -68,19 +68,19 @@ module.exports = app => {
           data = await callbackService.checkCreateSuiteUrl(obj);
           break;
       }
-
-      const aesMsg = this.dTalkApiUtil.encrypt(data);
-      const result = {
-        msg_signature: this.dTalkApiUtil.getSignature(
-          query.timestamp,
-          query.nonce,
-          aesMsg
-        ),
-        timeStamp: query.timestamp,
-        nonce: query.nonce,
-        encrypt: aesMsg,
-      };
-      ctx.body = result;
+      this.dingBody(data);
+      // const aesMsg = this.dTalkApiUtil.encrypt(data);
+      // const result = {
+      //   msg_signature: this.dTalkApiUtil.getSignature(
+      //     query.timestamp,
+      //     query.nonce,
+      //     aesMsg
+      //   ),
+      //   timeStamp: query.timestamp,
+      //   nonce: query.nonce,
+      //   encrypt: aesMsg,
+      // };
+      // ctx.body = result;
     }
   }
   return DingCbController;
