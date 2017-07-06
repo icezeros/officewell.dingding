@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 17:10:15
+ * @Last Modified time: 2017-07-06 18:17:54
  */
 'use strict';
 
@@ -39,6 +39,8 @@ module.exports = app => {
       const obj = JSON.parse(msg.message);
       // if(obj.EventType === 'check_create_suite_url')
       let data;
+      console.log(obj);
+
       switch (obj.EventType) {
         // 套件注册事件
         case 'check_create_suite_url':
