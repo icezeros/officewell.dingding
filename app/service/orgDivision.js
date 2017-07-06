@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 11:47:40
+ * @Last Modified time: 2017-07-06 18:58:43
  */
 
 'use strict';
@@ -56,12 +56,17 @@ module.exports = app => {
 
       for (let i = 0; i < departmentIds.length; i++) {
         const departmentId = departmentIds[i];
-        const departmentInfo = await this.getDingDivision(
+        // const departmentInfo = await this.getDingDivision(
+        //   corpToken,
+        //   corp.companyId,
+        //   departmentId
+        // );
+        // const department = this.dataFormat(corp.companyId, departmentInfo);
+        const department = this.getDingDivision(
           corpToken,
-          corp.corpId,
+          corp.companyId,
           departmentId
         );
-        const department = this.dataFormat(corp.companyId, departmentInfo);
         // departments.push(this.dataFormat(corp.companyId, departmentInfo));
         await this.ctx.model.OrgDivision.findOneAndUpdate(
           {
@@ -91,14 +96,14 @@ module.exports = app => {
     }
 
     // 从钉钉获取部门信息
-    async getDingDivision(corpToken, corpId, id) {
+    async getDingDivision(corpToken, companyId, id) {
       const config = this.app.config;
       const urlResult = await this.urlGet(config.getDepartmentUrl, {
         access_token: corpToken,
         id,
       });
       if (urlResult.status === 200 && urlResult.data.errcode === 0) {
-        return urlResult.data;
+        return this.dataFormat(companyId, urlResult.data);
       }
       return false;
     }
