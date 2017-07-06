@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 19:53:46
+ * @Last Modified time: 2017-07-06 20:08:34
  */
 
 'use strict';
@@ -93,7 +93,7 @@ module.exports = app => {
       return true;
     }
 
-    async addOrUpDepartment(corpId, DeptIds, eventType) {
+    async addOrUpDivision(corpId, DeptIds, eventType) {
       const helper = this.ctx.helper;
       const config = this.app.config;
       const service = this.service;
@@ -142,6 +142,27 @@ module.exports = app => {
         );
         // await this.ctx.model.DingUsers.create(tmpUser);
       }
+      return true;
+    }
+
+    async removeDivision(corpId, DeptIds) {
+      const helper = this.ctx.helper;
+      const config = this.app.config;
+      const service = this.service;
+      const corpToken = await helper.getCorpToken(corpId);
+      const company = await this.ctx.model.OrgCompany.findOne({
+        'ding.corpId': corpId,
+      });
+      const companyId = company._id;
+      console.log(corpToken);
+      console.log(company);
+      console.log('11111121111111111111111');
+      const tmp = await this.ctx.model.OrgDivision.remove({
+        companyId,
+        'ding.id': DeptIds,
+      });
+      console.log(tmp);
+
       return true;
     }
   }

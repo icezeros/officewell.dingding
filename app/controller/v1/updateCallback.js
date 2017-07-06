@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 19:39:22
+ * @Last Modified time: 2017-07-06 20:07:52
  */
 
 'use strict';
@@ -49,14 +49,17 @@ module.exports = app => {
           break;
         case 'org_dept_modify':
         case 'org_dept_create':
-          result = await this.ctx.service.updateCallback.addOrUpDepartment(
+          result = await this.ctx.service.updateCallback.addOrUpDivision(
             obj.CorpId,
             obj.DeptId,
             obj.EventType
           );
           break;
         case 'org_dept_remove':
-          result = true;
+          result = await this.ctx.service.updateCallback.removeDivision(
+            obj.CorpId,
+            obj.UserId
+          );
           break;
         case 'org_remove':
           result = true;
