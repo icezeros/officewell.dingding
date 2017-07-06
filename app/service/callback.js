@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 18:11:54
+ * @Last Modified time: 2017-07-06 18:19:51
  */
 
 'use strict';
@@ -79,6 +79,7 @@ module.exports = app => {
         { 'ding.corpId': urlData.auth_corp_info.corpid },
         {
           name: urlData.auth_corp_info.corp_name,
+          disabled: false,
           ding: {
             permanentCode: urlData.permanent_code,
             chPermanentCode: urlData.ch_permanent_code,
@@ -125,7 +126,7 @@ module.exports = app => {
       console.log(data);
 
       await this.ctx.model.OrgCompany.update(
-        { 'ding.corpId': data.CorpId },
+        { 'ding.corpId': data.AuthCorpId },
         {
           disabled: true,
         }
