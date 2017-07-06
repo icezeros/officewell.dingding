@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 19:43:43
+ * @Last Modified time: 2017-07-06 11:26:44
  */
 
 'use strict';
@@ -75,16 +75,22 @@ module.exports = app => {
 
       const urlData = urlResult.data;
       // 将企业永久授权码等企业信息保存到mongodb中
-      const orgData = await ctx.model.OrgCompany.create({
-        name: urlData.auth_corp_info.corp_name,
-        ding: {
-          permanentCode: urlData.permanent_code,
-          chPermanentCode: urlData.ch_permanent_code,
-          authCorpInfo: urlData.auth_corp_info,
-          corpId: urlData.auth_corp_info.corpid,
-          corpName: urlData.auth_corp_info.corp_name,
+      const orgData = await ctx.model.OrgCompany.findOneAndUpdate(
+        { 'ding.corpId': urlData.auth_corp_info.corpid },
+        {
+          name: urlData.auth_corp_info.corp_name,
+          ding: {
+            permanentCode: urlData.permanent_code,
+            chPermanentCode: urlData.ch_permanent_code,
+            authCorpInfo: urlData.auth_corp_info,
+            corpId: urlData.auth_corp_info.corpid,
+            corpName: urlData.auth_corp_info.corp_name,
+          },
         },
-      });
+        {
+          upsert: true,
+        }
+      );
 
       const activateResult = await ctx.curl(
         config.activateSuiteUrl + '?suite_access_token=' + suiteToken,
