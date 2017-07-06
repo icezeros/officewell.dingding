@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 11:42:30
+ * @Last Modified time: 2017-07-06 13:31:50
  */
 
 'use strict';
@@ -115,13 +115,19 @@ module.exports = app => {
       return 'success';
     }
     async changeAuth(data) {
+      await this.ctx.model.OrgCompany.update(
+        { 'ding.corpId': data.CorpId },
+        {
+          disabled: true,
+        }
+      );
       return data;
     }
     async checkUpdateSuiteUrl(data) {
       return data.Random;
     }
     async suiteRelieve(data) {
-      return data;
+      return 'success';
     }
     async default(data) {
       return data;
