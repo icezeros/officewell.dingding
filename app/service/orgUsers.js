@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 11:47:55
+ * @Last Modified time: 2017-07-06 18:14:56
  */
 
 'use strict';
@@ -45,6 +45,7 @@ module.exports = app => {
           continue;
         }
         tmpUser.createdAt = new Date();
+        tmpUser.disabled = false;
 
         const result = await this.ctx.model.DingUsers.findOneAndUpdate(
           { companyId: corp.companyId, userId: tmpUser.userId },
