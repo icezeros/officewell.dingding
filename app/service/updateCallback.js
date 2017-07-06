@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 19:38:46
+ * @Last Modified time: 2017-07-06 19:46:30
  */
 
 'use strict';
@@ -132,8 +132,8 @@ module.exports = app => {
             tmpDivision.modifiedAt = new Date();
             break;
         }
-        await this.ctx.model.DingUsers.findOneAndUpdate(
-          { companyId, userId: tmpDivision.userId },
+        await this.ctx.model.OrgCompany.findOneAndUpdate(
+          { companyId, 'ding.id': tmpDivision.ding.id },
           tmpDivision,
           {
             new: true,
