@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-07 16:50:27
+ * @Last Modified time: 2017-07-07 17:10:06
  */
 
 'use strict';
@@ -110,8 +110,10 @@ module.exports = app => {
 
       console.log('activateResult', activateResult);
 
+      const corpToken = await helper.getCorpToken(orgData.ding.corpId);
+
       const cbResult = await ctx.curl(
-        config.dingCallback + '?suite_access_token=' + suiteToken,
+        config.dingCallback + '?suite_access_token=' + corpToken,
         {
           method: 'POST',
           contentType: 'json',
