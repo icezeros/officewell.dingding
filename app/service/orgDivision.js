@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-07 09:28:47
+ * @Last Modified time: 2017-07-07 17:42:03
  */
 
 'use strict';
@@ -49,6 +49,8 @@ module.exports = app => {
         access_token: corpToken,
         id,
       });
+      console.log('---------tmpDepartUrl', tmpDepartUrl);
+
       const tmpDepartIds = tmpDepartUrl.data.department.map(item => item.id);
       departmentIds = departmentIds.concat(tmpDepartIds);
 
