@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-07 10:52:43
+ * @Last Modified time: 2017-07-07 16:50:27
  */
 
 'use strict';
@@ -108,6 +108,8 @@ module.exports = app => {
         }
       );
 
+      console.log('activateResult', activateResult);
+
       const cbResult = await ctx.curl(
         config.dingCallback + '?suite_access_token=' + suiteToken,
         {
@@ -131,6 +133,7 @@ module.exports = app => {
           dataType: 'json',
         }
       );
+      console.log('cbResult', cbResult);
 
       this.ctx.service.orgDivision.authScopes({
         companyId: orgData._id,
