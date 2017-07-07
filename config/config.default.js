@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-27 15:41:13
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-07 10:50:37
+ * @Last Modified time: 2017-07-07 17:27:27
  */
 'use strict';
 
@@ -39,7 +39,7 @@ module.exports = appInfo => {
   config.getUser = 'https://oapi.dingtalk.com/user/get';
   // 注册通讯录变更回调地址
   config.dingCallback =
-    'https://oapi.dingtalk.com/call_back/register_call_back?';
+    'https://oapi.dingtalk.com/call_back/register_call_back';
   // 通讯录变更回调地址
   config.callback = 'http://47.93.50.25:7100/v1/update-callback';
 
