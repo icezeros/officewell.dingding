@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-07 17:10:06
+ * @Last Modified time: 2017-07-07 17:32:12
  */
 
 'use strict';
@@ -113,7 +113,7 @@ module.exports = app => {
       const corpToken = await helper.getCorpToken(orgData.ding.corpId);
 
       const cbResult = await ctx.curl(
-        config.dingCallback + '?suite_access_token=' + corpToken,
+        config.dingCallback + '?access_token=' + corpToken,
         {
           method: 'POST',
           contentType: 'json',
