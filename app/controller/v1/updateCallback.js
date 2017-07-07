@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 20:26:52
+ * @Last Modified time: 2017-07-06 20:33:58
  */
 
 'use strict';
@@ -60,13 +60,6 @@ module.exports = app => {
             obj.CorpId,
             obj.DeptId
           );
-          console.log(result);
-          console.log('========');
-          console.log('========');
-          console.log('========');
-          console.log('========');
-          console.log('========');
-
           break;
         case 'org_remove':
           result = true;
@@ -78,25 +71,6 @@ module.exports = app => {
           result = true;
           break;
       }
-      /*if (obj.EventType === 'user_add_org') {
-        // if (obj.EventType === 'user_add_org') {
-        console.log('======================');
-        console.log('======================');
-        console.log('======================');
-        console.log('======================');
-        console.log(obj);
-
-        const addResult = await this.ctx.service.updateCallback.addUser(
-          obj.CorpId,
-          obj.UserId,
-          obj.EventType
-        );
-        if (!addResult) {
-          result = 'fail';
-        }
-      }*/
-      // if()
-      console.log(data);
       if (result) {
         this.dingBody('success');
       } else {

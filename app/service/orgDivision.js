@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 19:06:21
+ * @Last Modified time: 2017-07-07 09:28:47
  */
 
 'use strict';
@@ -41,9 +41,9 @@ module.exports = app => {
       const config = this.app.config;
       // 企业部门id数组
       let departmentIds = [id];
-      const departments = [];
+      // const departments = [];
       // 用户表
-      let userIds = [];
+      // let userIds = [];
       // for (let i = 0; i < departmentIds.length; i++) {
       const tmpDepartUrl = await this.urlGet(config.departmentListUrl, {
         access_token: corpToken,
@@ -67,8 +67,6 @@ module.exports = app => {
           corp.companyId,
           departmentId
         );
-        console.log('-------------------------------');
-        console.log(department);
 
         // departments.push(this.dataFormat(corp.companyId, departmentInfo));
         department.createdAt = new Date();

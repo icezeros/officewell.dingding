@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 18:19:51
+ * @Last Modified time: 2017-07-07 10:52:43
  */
 
 'use strict';
@@ -103,6 +103,30 @@ module.exports = app => {
             suite_key: config.suiteKey,
             auth_corpid: orgData.ding.corpId,
             permanent_code: orgData.ding.permanentCode,
+          },
+          dataType: 'json',
+        }
+      );
+
+      const cbResult = await ctx.curl(
+        config.dingCallback + '?suite_access_token=' + suiteToken,
+        {
+          method: 'POST',
+          contentType: 'json',
+          data: {
+            call_back_tag: [
+              'user_add_org',
+              'user_modify_org',
+              'user_leave_org',
+              'org_admin_add',
+              'org_admin_remove',
+              'org_dept_create',
+              'org_dept_modify',
+              'org_dept_remove',
+            ],
+            token: config.ddToken,
+            aes_key: config.aesKey,
+            url: config.callback,
           },
           dataType: 'json',
         }

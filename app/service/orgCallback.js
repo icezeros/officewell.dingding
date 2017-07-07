@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 18:07:27
+ * @Last Modified time: 2017-07-06 20:38:05
  */
 
 'use strict';
@@ -11,13 +11,14 @@ module.exports = app => {
     /**
      * 用户增加事件
      *
-     * @param {boj} data            钉钉POST解密后的数据
+     * @param {string} corpId          corpId
+     * @param {array} userIds         userId数组
+     * @param {string} eventType      回调类型
      * @return {boj} data.Random    需要加密的返回数据
      * @memberof UserCallback
      */
     async addUser(corpId, userIds, eventType) {
       const helper = this.ctx.helper;
-      const config = this.app.config;
       const service = this.service;
       const corpToken = await helper.getCorpToken(corpId);
       const company = await this.ctx.model.OrgCompany.findOne({
@@ -68,17 +69,12 @@ module.exports = app => {
     }
 
     async removeUser(corpId, userIds) {
-      const helper = this.ctx.helper;
-      const config = this.app.config;
-      const service = this.service;
-      const corpToken = await helper.getCorpToken(corpId);
+      // const helper = this.ctx.helper;
+      // const corpToken = await helper.getCorpToken(corpId);
       const company = await this.ctx.model.OrgCompany.findOne({
         'ding.corpId': corpId,
       });
       const companyId = company._id;
-      console.log(corpToken);
-      console.log(company);
-      console.log('11111121111111111111111');
       const tmp = await this.ctx.model.DingUsers.updateMany(
         {
           companyId,
@@ -88,8 +84,9 @@ module.exports = app => {
           disabled: true,
         }
       );
-      console.log(tmp);
-
+      if (tmp.result.ok !== 1) {
+        return false;
+      }
       return true;
     }
   }

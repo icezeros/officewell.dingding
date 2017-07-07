@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 20:27:03
+ * @Last Modified time: 2017-07-07 09:28:43
  */
 
 'use strict';
@@ -11,13 +11,14 @@ module.exports = app => {
     /**
      * 用户增加事件
      *
-     * @param {boj} data            钉钉POST解密后的数据
-     * @return {boj} data.Random    需要加密的返回数据
+     * @param {string} corpId      corpId
+     * @param {array} userIds     userId数组
+     * @param {string} eventType   eventType回调类型
+     * @return {boj} boolean    需要加密的返回数据
      * @memberof UpdateCallback
      */
     async addUser(corpId, userIds, eventType) {
       const helper = this.ctx.helper;
-      const config = this.app.config;
       const service = this.service;
       const corpToken = await helper.getCorpToken(corpId);
       const company = await this.ctx.model.OrgCompany.findOne({
@@ -69,16 +70,11 @@ module.exports = app => {
 
     async removeUser(corpId, userIds) {
       const helper = this.ctx.helper;
-      const config = this.app.config;
-      const service = this.service;
       const corpToken = await helper.getCorpToken(corpId);
       const company = await this.ctx.model.OrgCompany.findOne({
         'ding.corpId': corpId,
       });
       const companyId = company._id;
-      console.log(corpToken);
-      console.log(company);
-      console.log('11111121111111111111111');
       const tmp = await this.ctx.model.DingUsers.updateMany(
         {
           companyId,
@@ -97,15 +93,12 @@ module.exports = app => {
 
     async addOrUpDivision(corpId, DeptIds, eventType) {
       const helper = this.ctx.helper;
-      const config = this.app.config;
       const service = this.service;
       const corpToken = await helper.getCorpToken(corpId);
       const company = await this.ctx.model.OrgCompany.findOne({
         'ding.corpId': corpId,
       });
       const companyId = company._id;
-      console.log(corpToken);
-      console.log(company);
 
       for (let i = 0; i < DeptIds.length; i++) {
         const tmpDivision = await service.orgDivision.getDingDivision(
@@ -113,11 +106,9 @@ module.exports = app => {
           companyId,
           DeptIds[i]
         );
-        console.log(tmpDivision);
-
         if (!tmpDivision) {
           this.logger.error(
-            eventType + ' 部门失败:companyId ' + companyId + ' userId' + userIds[i]
+            eventType + ' 部门失败:companyId ' + companyId + ' userId' + DeptIds[i]
           );
           continue;
         }
@@ -148,25 +139,15 @@ module.exports = app => {
     }
 
     async removeDivision(corpId, DeptIds) {
-      const helper = this.ctx.helper;
-      const config = this.app.config;
-      const service = this.service;
-      const corpToken = await helper.getCorpToken(corpId);
       const company = await this.ctx.model.OrgCompany.findOne({
         'ding.corpId': corpId,
       });
       const companyId = company._id;
-      console.log(corpToken);
-      console.log(company);
-      console.log('11111121111111111111111');
       const tmp = await this.ctx.model.OrgDivision.remove({
         companyId,
         'ding.id': DeptIds,
       });
-      console.log({
-        companyId,
-        'ding.id': DeptIds,
-      });
+
       if (tmp.result.ok !== 1) {
         return false;
       }

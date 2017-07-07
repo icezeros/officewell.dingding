@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:32:31
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 17:05:14
+ * @Last Modified time: 2017-07-06 20:32:01
  */
 
 'use strict';
@@ -11,7 +11,7 @@ const crypto = require('crypto');
 const dTalkApiUtil = require('./app/extend/util').DTalkCrypt;
 
 module.exports = app => {
-  app.beforeStart(function*() {
+  app.beforeStart(async function() {
     // 应用会等待这个函数执行完成才启动
     app.logger.info(app.config.env);
   });
