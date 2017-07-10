@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-07 17:32:12
+ * @Last Modified time: 2017-07-10 11:49:37
  */
 
 'use strict';
@@ -52,7 +52,6 @@ module.exports = app => {
      */
     async tmpAuthCode(data) {
       console.log('data', data);
-
       const ctx = this.ctx;
       const helper = ctx.helper;
       const config = this.app.config;
