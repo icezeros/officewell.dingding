@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-23 20:18:56
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-07 09:28:43
+ * @Last Modified time: 2017-07-10 11:58:46
  */
 
 'use strict';
@@ -25,17 +25,12 @@ module.exports = app => {
         'ding.corpId': corpId,
       });
       const companyId = company._id;
-      console.log(corpToken);
-      console.log(company);
-
       for (let i = 0; i < userIds.length; i++) {
         const tmpUser = await service.orgUsers.getUser(
           corpToken,
           companyId,
           userIds[i]
         );
-        console.log(tmpUser);
-
         if (!tmpUser) {
           this.logger.error(
             eventType + ' 用户失败:companyId ' + companyId + ' userId' + userIds[i]
@@ -84,7 +79,6 @@ module.exports = app => {
           disabled: true,
         }
       );
-      console.log(tmp);
       if (tmp.result.ok !== 1) {
         return false;
       }

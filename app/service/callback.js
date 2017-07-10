@@ -51,7 +51,6 @@ module.exports = app => {
      * @memberof Callback
      */
     async tmpAuthCode(data) {
-      console.log('data', data);
       const ctx = this.ctx;
       const helper = ctx.helper;
       const config = this.app.config;
@@ -107,8 +106,6 @@ module.exports = app => {
         }
       );
 
-      console.log('activateResult', activateResult);
-
       const corpToken = await helper.getCorpToken(orgData.ding.corpId);
 
       const cbResult = await ctx.curl(
@@ -134,8 +131,6 @@ module.exports = app => {
           dataType: 'json',
         }
       );
-      console.log('cbResult', cbResult);
-
       this.ctx.service.orgDivision.authScopes({
         companyId: orgData._id,
         corpId: orgData.ding.corpId,
@@ -150,9 +145,6 @@ module.exports = app => {
       return data.Random;
     }
     async suiteRelieve(data) {
-      console.log('1111111111111111');
-      console.log(data);
-
       await this.ctx.model.OrgCompany.update(
         { 'ding.corpId': data.AuthCorpId },
         {

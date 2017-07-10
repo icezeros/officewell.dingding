@@ -2,7 +2,7 @@
  * @Author: icezeros.
  * @Date: 2017-07-05 19:14:37.
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 20:33:58
+ * @Last Modified time: 2017-07-10 11:57:03
  */
 
 'use strict';
@@ -19,11 +19,8 @@ module.exports = app => {
     async create() {
       const body = this.ctx.request.body;
       // const query = this.ctx.query;
-      console.log(body);
-      console.log(this.ctx.query);
       const data = this.dTalkApiUtil.decrypt(body.encrypt);
       const obj = JSON.parse(data.message);
-      console.log(obj);
       // const aesMsg = this.dTalkApiUtil.encrypt('success');
 
       let result;

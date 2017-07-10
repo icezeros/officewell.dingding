@@ -105,7 +105,6 @@ module.exports = {
       !dingOrgInfo.ding.accessToken ||
       moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment().add(3, 's'))
     ) {
-
       const suiteToken = await this.getSuiteToken();
       const urlData = await ctx.curl(
         config.getCorpTokenUrl + '?suite_access_token=' + suiteToken,
@@ -119,7 +118,6 @@ module.exports = {
           dataType: 'json',
         }
       );
-      console.log('urlData.data======', urlData.data);
 
       if (urlData.status === 200) {
         const accessToken = {

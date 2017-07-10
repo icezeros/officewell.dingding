@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-22 13:52:55
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 12:12:56
+ * @Last Modified time: 2017-07-10 11:56:55
  */
 'use strict';
 
@@ -65,7 +65,6 @@ module.exports = app => {
         }
       );
 
-      console.log(result);
       this.ctx.body = result.data;
     }
   }

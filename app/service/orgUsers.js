@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 16:54:16
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-06 18:14:56
+ * @Last Modified time: 2017-07-10 11:58:30
  */
 
 'use strict';
@@ -22,8 +22,6 @@ module.exports = app => {
       const { ctx } = this;
       const { helper } = ctx;
       const config = this.app.config;
-      console.log('corp-----', corp);
-
       const corpToken = await helper.getCorpToken(corp.corpId);
       const urlData = await this.urlGet(config.getDepartUserListUrl, {
         access_token: corpToken,
@@ -55,7 +53,6 @@ module.exports = app => {
             upsert: true,
           }
         );
-        console.log(result);
       }
     }
 
@@ -72,9 +69,6 @@ module.exports = app => {
         );
         return false;
       }
-      console.log('companyId', companyId);
-      console.log('tmpUserUrl.data', tmpUserUrl.data);
-
       return this.dataFormat(companyId, tmpUserUrl.data);
     }
 

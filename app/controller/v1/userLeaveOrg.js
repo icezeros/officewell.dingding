@@ -19,20 +19,12 @@ module.exports = app => {
     async create() {
       const body = this.ctx.request.body;
       // const query = this.ctx.query;
-      console.log(body);
-      console.log(this.ctx.query);
       const data = this.dTalkApiUtil.decrypt(body.encrypt);
       const obj = JSON.parse(data.message);
-      console.log(obj);
 
       let result = 'success';
       if (obj.EventType === 'user_leave_org') {
         // if (obj.EventType === 'user_add_org') {
-        console.log('======================');
-        console.log('======================');
-        console.log('======================');
-        console.log('======================');
-        console.log(obj);
 
         const addResult = await this.ctx.service.updateCallback.removeUser(
           obj.CorpId,
@@ -44,7 +36,6 @@ module.exports = app => {
         }
       }
       // if()
-      console.log(data);
       // this.ctx.body = result;
       this.dingBody(result);
 
