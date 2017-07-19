@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-03 13:49:47
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 18:49:32
+ * @Last Modified time: 2017-07-13 16:35:31
  */
 'use strict';
 const _ = require('lodash');
@@ -56,10 +56,7 @@ module.exports = {
     }
 
     // 判断token是否超时
-    if (
-      !dingSysInfo.accessToken ||
-      moment(dingSysInfo.accessToken.expire).isBefore(moment())
-    ) {
+    if (!dingSysInfo.accessToken || moment(dingSysInfo.accessToken.expire).isBefore(moment())) {
       const urlData = await ctx.curl(config.getSuiteAccessTokenUrl, {
         method: 'POST',
         contentType: 'json',
@@ -75,10 +72,7 @@ module.exports = {
           accessToken: urlData.data.suite_access_token,
           expire: moment().add(urlData.data.expires_in - 200, 's'),
         };
-        await ctx.model.DingSysInfo.update(
-          { orgId: 'SYSTEM' },
-          { accessToken }
-        );
+        await ctx.model.DingSysInfo.update({ orgId: 'SYSTEM' }, { accessToken });
         suiteToken = accessToken.accessToken;
       }
     } else {
@@ -101,23 +95,17 @@ module.exports = {
     }
 
     // 判断token是否超时
-    if (
-      !dingOrgInfo.ding.accessToken ||
-      moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment().add(3, 's'))
-    ) {
+    if (!dingOrgInfo.ding.accessToken || moment(dingOrgInfo.ding.accessToken.expire).isBefore(moment().add(3, 's'))) {
       const suiteToken = await this.getSuiteToken();
-      const urlData = await ctx.curl(
-        config.getCorpTokenUrl + '?suite_access_token=' + suiteToken,
-        {
-          method: 'POST',
-          contentType: 'json',
-          data: {
-            auth_corpid: corpId,
-            permanent_code: dingOrgInfo.ding.permanentCode,
-          },
-          dataType: 'json',
-        }
-      );
+      const urlData = await ctx.curl(config.getCorpTokenUrl + '?suite_access_token=' + suiteToken, {
+        method: 'POST',
+        contentType: 'json',
+        data: {
+          auth_corpid: corpId,
+          permanent_code: dingOrgInfo.ding.permanentCode,
+        },
+        dataType: 'json',
+      });
 
       if (urlData.status === 200) {
         const accessToken = {

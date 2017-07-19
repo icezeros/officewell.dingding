@@ -15,15 +15,12 @@ module.exports = appInfo => {
   config.ddToken = 'sdfg7dh74g9DG7d';
   config.suiteKey = 'suitejrn329ssum6e2iki';
   config.aesKey = '5p95wcajc9no5p4v9ailj863u7gnf47zopkoj0vakl6';
-  config.suiteSecret =
-    'CgSxWaHy0faBelBWZrJlETAC2XPcdWk4R4Leun1POmH_YjY7z1rZpuDaLIN_4FeJ';
+  config.suiteSecret = 'CgSxWaHy0faBelBWZrJlETAC2XPcdWk4R4Leun1POmH_YjY7z1rZpuDaLIN_4FeJ';
   // 获取套件访问token URL
-  config.getSuiteAccessTokenUrl =
-    'https://oapi.dingtalk.com/service/get_suite_token';
+  config.getSuiteAccessTokenUrl = 'https://oapi.dingtalk.com/service/get_suite_token';
   // 获取企业永久授权码
-  config.getPermanentCodeUrl =
-    'https://oapi.dingtalk.com/service/get_permanent_code';
-  // 激活套件token
+  config.getPermanentCodeUrl = 'https://oapi.dingtalk.com/service/get_permanent_code';
+  // 激活套件
   config.activateSuiteUrl = 'https://oapi.dingtalk.com/service/activate_suite';
   // 获取企业访问token URL
   config.getCorpTokenUrl = 'https://oapi.dingtalk.com/service/get_corp_token';
@@ -38,8 +35,7 @@ module.exports = appInfo => {
   // 获取成员详情
   config.getUser = 'https://oapi.dingtalk.com/user/get';
   // 注册通讯录变更回调地址
-  config.dingCallback =
-    'https://oapi.dingtalk.com/call_back/register_call_back';
+  config.dingCallback = 'https://oapi.dingtalk.com/call_back/register_call_back';
   // 通讯录变更回调地址
   config.callback = 'http://47.93.50.25:7100/v1/update-callback';
 

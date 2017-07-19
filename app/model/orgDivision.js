@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-07-04 15:24:48
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-04 19:40:00
+ * @Last Modified time: 2017-07-10 14:23:59
  */
 
 'use strict';
@@ -78,17 +78,14 @@ module.exports = app => {
     { collection: 'org_division' }
   );
   orgDivisionSchema.pre('save', function(next) {
-    // do stuff
     this.createdAt = new Date();
     next();
   });
-  // orgDivisionSchema.pre('update', function(next) {
-  //   // do stuff
-  //   console.log('====------===');
-  //   orgDivisionSchema.modifiedAt = new Date();
-  //   console.log(this);
-  //   next();
-  // });
+  orgDivisionSchema.pre('update', function(next) {
+    this.update({}, { $set: { modifiedAt: new Date() } });
+
+    next();
+  });
 
   return mongoose.model('OrgDivision', orgDivisionSchema);
 };

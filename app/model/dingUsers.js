@@ -2,7 +2,7 @@
  * @Author: icezeros
  * @Date: 2017-06-12 16:00:02
  * @Last Modified by: icezeros
- * @Last Modified time: 2017-07-05 16:20:31
+ * @Last Modified time: 2017-07-10 14:24:40
  */
 'use strict';
 module.exports = app => {
@@ -85,13 +85,10 @@ module.exports = app => {
     this.createdAt = new Date();
     next();
   });
-  // dingUsersSchema.pre('update', function(next) {
-  //   // do stuff
-  //   console.log('====------===');
-  //   dingUsersSchema.modifiedAt = new Date();
-  //   console.log(this.orgId);
-  //   next();
-  // });
+  dingUsersSchema.pre('update', function(next) {
+    this.update({}, { $set: { modifiedAt: new Date() } });
+    next();
+  });
 
   return mongoose.model('DingUsers', dingUsersSchema);
 };
